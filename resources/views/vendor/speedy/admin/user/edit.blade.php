@@ -43,6 +43,29 @@
                                 @endif
                             </div>
                             <div class="form-group">
+                                <label>{{ trans('view.admin.user.identity') }}</label>
+                                <input type="text" name="identity" class="form-control"
+                                       placeholder="{{ trans('view.admin.user.identity') }}"
+                                       value="{{ isset($user) ? $user->identity : '' }}">
+                            </div>
+                            <div class="form-group">
+                                <label>{{ trans('view.admin.user.sex') }}</label>
+                                <select name="sex" class="form-control">
+                                    @if(isset($user->sex ))
+                                        @if($user->sex == '0')
+                                            <option value="0" selected>男</option>
+                                            <option value="1">女</option>
+                                        @else
+                                            <option value="0">男</option>
+                                            <option value="1" selected>女</option>
+                                        @endif
+                                    @else
+                                        <option value="0">男</option>
+                                        <option value="1">女</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label>{{ trans('view.admin.user.shop') }}</label>
                                 <select name="shop_id" class="form-control">
                                     @foreach($shops as $shop)
@@ -50,7 +73,8 @@
                                             <option value="false">{{ trans('view.admin.public.none') }}</option>
                                             <option value="{{ $shop->id }}" selected>{{$shop->name}}</option>
                                         @else
-                                            <option value="false"selected>{{ trans('view.admin.public.none') }}</option>
+                                            <option value="false"
+                                                    selected>{{ trans('view.admin.public.none') }}</option>
                                             <option value="{{ $shop->id }}">{{$shop->name}}</option>
                                         @endif
                                     @endforeach
@@ -64,7 +88,7 @@
                             </div>
                             <div class="form-group">
                                 <label>{{ trans('view.admin.user.password') }}</label>
-                                <input maxlength="6" name="password" type="password" class="form-control"
+                                <input maxlength="6" minlength="6" name="password" type="password" class="form-control"
                                        id="exampleInputPassword1"
                                        placeholder="{{ trans('view.admin.user.password') }}">
                             </div>

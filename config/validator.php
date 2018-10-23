@@ -5,6 +5,8 @@ return [
         'user' => [
             'update' => [
                 'name' => 'required|max:255',
+                'sex' =>'required',
+                'identity' => 'required',
 //                'email' => 'required|email|max:255|unique:users,email',
 //                'password' => 'nullable|min:6',
             ],
@@ -12,7 +14,9 @@ return [
                 'name' => 'required|max:255',
                 'work_id' => 'required|max:128|unique:users,work_id',
 //                'email' => 'required|email|max:255|unique:users',
-                'password' => 'min:6',
+                'password' => 'length:6',
+                'sex' =>'required',
+                'identity' => 'required',
             ],
         ],
         'role' => [

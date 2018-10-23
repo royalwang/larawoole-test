@@ -174,6 +174,8 @@
                             'password'     => bcrypt( $request->get( 'password' ) ) ,
                             'role_id'      => $request->get( 'role_id' ) ,
                             'work_id'      => $request->get( 'work_id' ) ,
+                            'sex'          => $request->get( 'sex' ) ,
+                            'identity'     => $request->get( 'identity' ) ,
                         ]
                     );
                     break;
@@ -188,6 +190,8 @@
                                 'password'     => bcrypt( $request->get( 'password' ) ) ,
                                 'role_id'      => $request->get( 'role_id' ) ,
                                 'work_id'      => $request->get( 'work_id' ) ,
+                                'sex'          => $request->get( 'sex' ) ,
+                                'identity'     => $request->get( 'identity' ) ,
                             ]
                         );
                     }
@@ -209,6 +213,8 @@
                                 'password'     => bcrypt( $request->get( 'password' ) ) ,
                                 'role_id'      => $request->get( 'role_id' ) ,
                                 'work_id'      => $request->get( 'work_id' ) ,
+                                'sex'          => $request->get( 'sex' ) ,
+                                'identity'     => $request->get( 'identity' ) ,
                             ]
                         );
                     }
@@ -228,6 +234,8 @@
                                 'password'     => bcrypt( $request->get( 'password' ) ) ,
                                 'role_id'      => $request->get( 'role_id' ) ,
                                 'work_id'      => $request->get( 'work_id' ) ,
+                                'sex'          => $request->get( 'sex' ) ,
+                                'identity'     => $request->get( 'identity' ) ,
                             ]
                         );
                     }
@@ -250,6 +258,8 @@
                                 'password'     => bcrypt( $request->get( 'password' ) ) ,
                                 'role_id'      => $request->get( 'role_id' ) ,
                                 'work_id'      => $request->get( 'work_id' ) ,
+                                'sex'          => $request->get( 'sex' ) ,
+                                'identity'     => $request->get( 'identity' ) ,
                             ]
                         );
                     }
@@ -359,6 +369,8 @@
                 'email'        => $payload['email'] ,
                 'display_name' => $payload['display_name'] ,
                 'work_id'      => $payload['work_id'] ,
+                'sex'          => $request->get( 'sex' ) ,
+                'identity'     => $request->get( 'identity' ) ,
             ];
 
             //表单选填数据

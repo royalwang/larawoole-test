@@ -16,6 +16,8 @@
                                     <th>{{ trans('view.admin.user.role') }}</th>
                                     <th>{{ trans('view.admin.user.display_name') }}</th>
                                     <th>{{ trans('view.admin.user.work_id') }}</th>
+                                    <th>{{ trans('view.admin.user.identity') }}</th>
+                                    <th>{{ trans('view.admin.user.sex') }}</th>
                                     <th>{{ trans('view.admin.user.shop') }}</th>
                                     <th>{{ trans('view.admin.public.created_at') }}</th>
                                     <th>{{ trans('view.admin.public.action') }}</th>
@@ -28,6 +30,8 @@
                                     <td>{{ $user->role ? $user->role->display_name : '-' }}</td>
                                     <td>{{ $user->display_name ? $user->display_name : '-' }}</td>
                                     <td>{{ $user->work_id ? $user->work_id : '-' }}</td>
+                                    <td>{{ $user->identity ? $user->identity : '-' }}</td>
+                                    <td>{{ $user->sex == '0' ? '男' : '女' }}</td>
                                     <td>{{ $user->belongsToShop ? $user->belongsToShop->name : '-' }}</td>
                                     <td>{{ $user->created_at }}</td>
                                     <td>

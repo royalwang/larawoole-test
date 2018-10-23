@@ -9,7 +9,9 @@ return [
         'name' => '姓名',
         'email' => '邮箱',
         'password' => '密码',
-        'work_id'  => '工号'
+        'work_id'  => '工号',
+        'sex' => '性别',
+        'identity' => '身份证号码'
     ],
     'teacher' => [
         'user_id' => '学员人数',

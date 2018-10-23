@@ -20,7 +20,9 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->nullable();
             $table->string('password');
-            $table->string('work_id')->unique();//员工工号
+            $table->string('work_id')->unique();//员工工号 12位纯数字
+            $table->string('identity')->nullable();//身份证号码
+            $table->char('sex')->nullable();//性别  0:男 1:女
             $table->string('valid',1)->default('1');
             $table->rememberToken();
             $table->timestamps();
