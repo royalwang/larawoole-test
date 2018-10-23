@@ -30,18 +30,14 @@
                                        placeholder="{{ trans('view.admin.user.display_name') }}"
                                        value="{{ isset($user) ? $user->display_name : '' }}">
                             </div>
-                            <div class="form-group">
-                                <label>{{ trans('view.admin.user.work_id') }}</label>
-                                @if(isset($user))
+                            @if(isset($user))
+                                <div class="form-group">
+                                    <label>{{ trans('view.admin.user.work_id') }}</label>
                                     <input type="text" name="work_id" class="form-control"
                                            placeholder="{{ trans('view.admin.user.work_id') }}"
                                            value="{{ isset($user) ? $user->work_id : '' }}" readonly>
-                                @else
-                                    <input type="text" name="work_id" class="form-control"
-                                           placeholder="{{ trans('view.admin.user.work_id') }}"
-                                           value="{{ isset($user) ? $user->work_id : '' }}">
-                                @endif
-                            </div>
+                                </div>
+                            @endif
                             <div class="form-group">
                                 <label>{{ trans('view.admin.user.identity') }}</label>
                                 <input type="text" name="identity" class="form-control"
@@ -64,6 +60,12 @@
                                         <option value="1">女</option>
                                     @endif
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label>请选择入职时间</label>
+                                <input type="date" name="hire_date" class="form-control"
+                                       placeholder="{{ trans('view.admin.user.hire_date') }}"
+                                       value="{{ isset($user) ? $user->hire_date:'' }}" required>
                             </div>
                             <div class="form-group">
                                 <label>{{ trans('view.admin.user.shop') }}</label>
@@ -93,7 +95,8 @@
                             </div>
                             <div class="form-group">
                                 <label>{{ trans('view.admin.user.password') }}</label>
-                                <input maxlength="6" minlength="6" name="password" type="password" class="form-control"
+                                <input maxlength="6" minlength="6" name="password" type="password"
+                                       class="form-control"
                                        id="exampleInputPassword1"
                                        placeholder="{{ trans('view.admin.user.password') }}">
                             </div>

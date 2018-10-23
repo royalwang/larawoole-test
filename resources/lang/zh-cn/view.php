@@ -26,6 +26,7 @@
                 'role'               => '角色' ,
                 'shop'               => '门店' ,
                 'equip'              => '设备' ,
+                'hire_date'          => '入职时间' ,
                 'create_user_failed' => '创建用户失败！' ,
                 'edit_user_failed'   => '编辑用户失败！' ,
                 'sure_to_delete'     => '确定删除该用户？' ,

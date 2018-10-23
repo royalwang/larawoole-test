@@ -21,7 +21,7 @@
          */
         protected $fillable = [
             'display_name' , 'email' , 'password' , 'role_id' , 'name' , 'shops_id' , 'work_id' , 'teacher_id' ,
-            'identity' , 'sex' ,
+            'identity' , 'sex' , 'hire_date' ,
         ];
 
         /**

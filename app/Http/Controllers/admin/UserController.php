@@ -154,6 +154,9 @@
          */
         public function store( Request $request )
         {
+
+            $payload = $request->all();
+
             $nowUser = Auth::user();
 
             $validator = $this->mustValidate( 'user.store' );
@@ -163,17 +166,18 @@
                 return redirect()->back()->withErrors( $validator )->withInput();
             }
 
-            $payload = $request->all();
+            $ful_str = $this->createWorkId( $payload['identity'] , $payload['hire_date'] );
 
             //表单必填数据
             $data = [
                 'name'         => $payload['name'] ,
                 'email'        => $payload['email'] ,
                 'display_name' => $payload['display_name'] ,
-                'work_id'      => $payload['work_id'] ,
+                'work_id'      => $ful_str ,
                 'sex'          => $payload['sex'] ,
                 'identity'     => $payload['identity'] ,
                 'password'     => bcrypt( $payload['password'] ) ,
+                'hire_date'    => $request->get( 'hire_date' ) ,
             ];
 
             //表单选填数据
@@ -346,6 +350,7 @@
                 'work_id'      => $payload['work_id'] ,
                 'sex'          => $request->get( 'sex' ) ,
                 'identity'     => $request->get( 'identity' ) ,
+                'hire_date'    => $request->get( 'hire_date' ) ,
             ];
 
             //表单选填数据
@@ -643,5 +648,52 @@
             );
 
             return $result ? redirect()->route( 'admin.user.index' ) : redirect()->back()->withErrors( trans( 'view.admin.user.delete_user_failed' ) )->withInput();
+        }
+
+        /**
+         * 自动生成不重复员工号
+         *
+         * @param string $identity 身份证号码
+         * @param string $hire_date 入职时间
+         *
+         * @since 1.0
+         * @return string
+         */
+        public function createWorkId( $identity , $hire_date )
+        {
+            $work_id_8 = [];
+            $num       = 1;
+            $full_str  = '';
+            $head_mid  = substr( $identity , 0 , 4 ) . substr( $hire_date , 2 , 2 ) . substr( $hire_date , 5 , 2 );
+            $users     = Speedy::getModelInstance( 'user' )->where( 'valid' , '1' )->get();
+            foreach ( $users as $v )
+            {
+                array_push( $work_id_8 , substr( $v->work_id , 0 , 8 ) );
+            }
+            for ( $i = 0 ; $i < count( $work_id_8 ) ; $i++ )
+            {
+                if ( $work_id_8[ $i ] == $head_mid )
+                {
+                    $num += 1;
+                }
+            }
+            if ( $num < 10 )
+            {
+                $full_str = $head_mid . '000' . $num;
+            }
+            else if ( $num < 100 )
+            {
+                $full_str = $head_mid . '00' . $num;
+            }
+            else if ( $num < 1000 )
+            {
+                $full_str = $head_mid . '0' . $num;
+            }
+            else
+            {
+                $full_str = $head_mid . $num;
+            }
+
+            return $full_str;
         }
     }

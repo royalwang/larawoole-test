@@ -4,20 +4,22 @@
         'admin' => [
             'user'    => [
                 'update' => [
-                    'name'     => 'required|max:255' ,
-                    'sex'      => 'required' ,
-                    'identity' => 'required' ,
+                    'name'      => 'required|max:255' ,
+                    'sex'       => 'required' ,
+                    'identity'  => 'required' ,
+                    'hire_date' => 'required' ,
                     //                'email' => 'required|email|max:255|unique:users,email',
                     //                'password' => 'nullable|min:6',
                 ] ,
                 'store'  => [
-                    'name'     => 'required|max:255' ,
-                    'work_id'  => 'required|unique:users,work_id' ,
+                    'name'         => 'required|max:255' ,
+                    //'work_id'      => 'required|unique:users,work_id' ,
                     //                'email' => 'required|email|max:255|unique:users',
-                    'sex'      => 'required' ,
-                    'identity' => 'required' ,
-                    'password' => 'required' ,
+                    'sex'          => 'required' ,
+                    'identity'     => 'required' ,
+                    'password'     => 'required' ,
                     'display_name' => 'required' ,
+                    'hire_date'    => 'required' ,
                 ] ,
             ] ,
             'role'    => [
