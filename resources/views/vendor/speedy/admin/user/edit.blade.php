@@ -68,16 +68,21 @@
                             <div class="form-group">
                                 <label>{{ trans('view.admin.user.shop') }}</label>
                                 <select name="shop_id" class="form-control">
-                                    @foreach($shops as $shop)
-                                        @if(isset($user->shops_id))
-                                            <option value="false">{{ trans('view.admin.public.none') }}</option>
-                                            <option value="{{ $shop->id }}" selected>{{$shop->name}}</option>
-                                        @else
-                                            <option value="false"
-                                                    selected>{{ trans('view.admin.public.none') }}</option>
+                                    @if(isset($user->shops_id))
+                                        @foreach($shops as $shop)
+                                            @if($user->shops_id == $shop->id)
+                                                <option value="{{ $shop->id }}" selected>{{$shop->name}}</option>
+                                            @else
+                                                <option value="{{ $shop->id }}">{{$shop->name}}</option>
+                                            @endif
+                                        @endforeach
+                                        <option value="false">{{ trans('view.admin.public.none') }}</option>
+                                    @else
+                                        <option value="false">{{ trans('view.admin.public.none') }}</option>
+                                        @foreach($shops as $shop)
                                             <option value="{{ $shop->id }}">{{$shop->name}}</option>
-                                        @endif
-                                    @endforeach
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                             <div class="form-group">

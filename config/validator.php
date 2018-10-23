@@ -12,11 +12,12 @@
                 ] ,
                 'store'  => [
                     'name'     => 'required|max:255' ,
-                    'work_id'  => 'required|max:128|unique:users,work_id' ,
+                    'work_id'  => 'required|unique:users,work_id' ,
                     //                'email' => 'required|email|max:255|unique:users',
                     'sex'      => 'required' ,
                     'identity' => 'required' ,
                     'password' => 'required' ,
+                    'display_name' => 'required' ,
                 ] ,
             ] ,
             'role'    => [

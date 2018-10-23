@@ -163,37 +163,45 @@
                 return redirect()->back()->withErrors( $validator )->withInput();
             }
 
+            $payload = $request->all();
+
+            //表单必填数据
+            $data = [
+                'name'         => $payload['name'] ,
+                'email'        => $payload['email'] ,
+                'display_name' => $payload['display_name'] ,
+                'work_id'      => $payload['work_id'] ,
+                'sex'          => $payload['sex'] ,
+                'identity'     => $payload['identity'] ,
+                'password'     => bcrypt( $payload['password'] ) ,
+            ];
+
+            //表单选填数据
+            if ( $payload['role_id'] )
+            {
+                $data = array_merge( $data , [ 'role_id' => $payload['role_id'] ] );
+            }
+            if ( $payload['shop_id'] )
+            {
+                if ( $payload['shop_id'] == 'false' )
+                {
+                    $data = array_merge( $data , [ 'shops_id' => null ] );
+                }
+                else
+                {
+                    $data = array_merge( $data , [ 'shops_id' => $payload['shop_id'] ] );
+                }
+            }
+
             switch ( $nowUser->role_id )
             {
                 case ( '1' ):
-                    $user = Speedy::getModelInstance( 'user' )->create(
-                        [
-                            'name'         => $request->get( 'name' ) ,
-                            'display_name' => $request->get( 'display_name' ) ,
-                            'email'        => $request->get( 'email' ) ,
-                            'password'     => bcrypt( $request->get( 'password' ) ) ,
-                            'role_id'      => $request->get( 'role_id' ) ,
-                            'work_id'      => $request->get( 'work_id' ) ,
-                            'sex'          => $request->get( 'sex' ) ,
-                            'identity'     => $request->get( 'identity' ) ,
-                        ]
-                    );
+                    $user = Speedy::getModelInstance( 'user' )->create( $data );
                     break;
                 case ( '2' ):
                     if ( $request->get( 'role_id' ) != '1' )
                     {
-                        $user = Speedy::getModelInstance( 'user' )->create(
-                            [
-                                'name'         => $request->get( 'name' ) ,
-                                'display_name' => $request->get( 'display_name' ) ,
-                                'email'        => $request->get( 'email' ) ,
-                                'password'     => bcrypt( $request->get( 'password' ) ) ,
-                                'role_id'      => $request->get( 'role_id' ) ,
-                                'work_id'      => $request->get( 'work_id' ) ,
-                                'sex'          => $request->get( 'sex' ) ,
-                                'identity'     => $request->get( 'identity' ) ,
-                            ]
-                        );
+                        $user = Speedy::getModelInstance( 'user' )->create( $data );
                     }
                     else
                     {
@@ -205,18 +213,7 @@
                         && $request->get( 'role_id' ) != '2'
                         && $request->get( 'role_id' ) != '3' )
                     {
-                        $user = Speedy::getModelInstance( 'user' )->create(
-                            [
-                                'name'         => $request->get( 'name' ) ,
-                                'display_name' => $request->get( 'display_name' ) ,
-                                'email'        => $request->get( 'email' ) ,
-                                'password'     => bcrypt( $request->get( 'password' ) ) ,
-                                'role_id'      => $request->get( 'role_id' ) ,
-                                'work_id'      => $request->get( 'work_id' ) ,
-                                'sex'          => $request->get( 'sex' ) ,
-                                'identity'     => $request->get( 'identity' ) ,
-                            ]
-                        );
+                        $user = Speedy::getModelInstance( 'user' )->create( $data );
                     }
                     else
                     {
@@ -226,18 +223,7 @@
                 case ( '4' ):
                     if ( $request->get( 'role_id' ) == '5' )
                     {
-                        $user = Speedy::getModelInstance( 'user' )->create(
-                            [
-                                'name'         => $request->get( 'name' ) ,
-                                'display_name' => $request->get( 'display_name' ) ,
-                                'email'        => $request->get( 'email' ) ,
-                                'password'     => bcrypt( $request->get( 'password' ) ) ,
-                                'role_id'      => $request->get( 'role_id' ) ,
-                                'work_id'      => $request->get( 'work_id' ) ,
-                                'sex'          => $request->get( 'sex' ) ,
-                                'identity'     => $request->get( 'identity' ) ,
-                            ]
-                        );
+                        $user = Speedy::getModelInstance( 'user' )->create( $data );
                     }
                     else
                     {
@@ -250,18 +236,7 @@
                     if ( $request->get( 'role_id' ) == '5'
                         || $request->get( 'role_id' ) == '4' )
                     {
-                        $user = Speedy::getModelInstance( 'user' )->create(
-                            [
-                                'name'         => $request->get( 'name' ) ,
-                                'display_name' => $request->get( 'display_name' ) ,
-                                'email'        => $request->get( 'email' ) ,
-                                'password'     => bcrypt( $request->get( 'password' ) ) ,
-                                'role_id'      => $request->get( 'role_id' ) ,
-                                'work_id'      => $request->get( 'work_id' ) ,
-                                'sex'          => $request->get( 'sex' ) ,
-                                'identity'     => $request->get( 'identity' ) ,
-                            ]
-                        );
+                        $user = Speedy::getModelInstance( 'user' )->create( $data );
                     }
                     else
                     {
