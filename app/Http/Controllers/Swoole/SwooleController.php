@@ -278,6 +278,7 @@
          *
          * @since 1.0
          * @return string
+         * @todo 设置员工机每天特定时间退出登录
          */
         public function proceedData( $data )
         {
