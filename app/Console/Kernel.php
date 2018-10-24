@@ -3,7 +3,7 @@
     namespace App\Console;
 
     use App\Console\Commands\SwooleConmmand;
-    use App\Console\Commands\TestCron;
+    use App\Console\Commands\AutoLogoutUserMachine;
     use Illuminate\Console\Scheduling\Schedule;
     use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
     use SwooleTW\Http\Commands\HttpServerCommand;
@@ -17,7 +17,7 @@
          * @var array
          */
         protected $commands = [
-            SwooleConmmand::class , HttpServerCommand::class , ScehduleTask::class , TestCron::class ,
+            SwooleConmmand::class , HttpServerCommand::class , ScehduleTask::class , AutoLogoutUserMachine::class ,
 
         ];
 
