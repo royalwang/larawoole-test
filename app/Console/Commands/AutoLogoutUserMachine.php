@@ -45,7 +45,7 @@
                 ->where( 'user_id' , '<>' , 'null' )
                 ->get();
 
-            if ( $equip )
+            if ( $equip->count() >0 )
             {
                 foreach ( $equip as $v )
                 {
