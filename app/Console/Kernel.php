@@ -30,7 +30,7 @@
          */
         protected function schedule( Schedule $schedule )
         {
-            $schedule->command( 'test:cron' )
+            $schedule->command( 'machine:logout' )
                 ->everyMinute();
         }
 
