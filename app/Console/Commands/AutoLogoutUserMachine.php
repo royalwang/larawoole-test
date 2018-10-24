@@ -4,7 +4,7 @@
 
     use Carbon\Carbon;
     use Illuminate\Console\Command;
-    use Illuminate\Support\Facades\Log;
+    use Log;
     use Speedy;
 
     class AutoLogoutUserMachine extends Command
@@ -45,7 +45,7 @@
                 ->where( 'user_id' , '<>' , 'null' )
                 ->get();
 
-            if ( $equip->count() >0 )
+            if ( $equip->count() > 0 )
             {
                 foreach ( $equip as $v )
                 {
