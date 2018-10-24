@@ -21,7 +21,7 @@
          *
          * @var string
          */
-        protected $description = 'Command description';
+        protected $description = 'auto logout user machine when the shop closed. ';
 
         /**
          * Create a new command instance.
@@ -45,7 +45,7 @@
                 ->where( 'user_id' , '<>' , 'null' )
                 ->get();
 
-            if ( isset( $equip ) )
+            if ( $equip )
             {
                 foreach ( $equip as $v )
                 {
