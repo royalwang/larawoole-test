@@ -136,7 +136,7 @@
 
             $role = Speedy::getModelInstance( 'role' )->find( $id );
             $role->update( [ 'name' => $request->get( 'name' ) , 'display_name' => $request->get( 'display_name' ) ] );
-            
+
             if ( $request->get( 'permission_id' ) )
             {
                 Speedy::getModelInstance( 'permission_role' )->where( 'role_id' , $id )->delete();

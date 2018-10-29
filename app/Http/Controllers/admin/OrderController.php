@@ -19,13 +19,13 @@ class OrderController extends BaseController
             case ('1'):
                 $orders = Speedy::getModelInstance('order')
                     ->where('valid','1')
-                    ->orderBy('updated_at','DESC')
+                    ->orderBy('created_at','DESC')
                     ->paginate(10);
                 break;
             case ('2'):
                 $orders = Speedy::getModelInstance('order')
                     ->where('valid','1')
-                    ->orderBy('updated_at','DESC')
+                    ->orderBy('created_at','DESC')
                     ->paginate(10);
                 break;
             case ('3'):
@@ -40,14 +40,14 @@ class OrderController extends BaseController
                 $orders = Speedy::getModelInstance('order')
                     ->where('valid','1')
                     ->whereIn('shops_id',$shops)
-                    ->orderBy('updated_at','DESC')
+                    ->orderBy('created_at','DESC')
                     ->paginate(10);
                 break;
             case ('4'):
                 $orders = Speedy::getModelInstance('order')
                     ->where('valid','1')
                     ->where('shops_id',$nowUser->shops_id)
-                    ->orderBy('updated_at','DESC')
+                    ->orderBy('created_at','DESC')
                     ->paginate(10);
                 break;
             case ('6'):
@@ -62,7 +62,7 @@ class OrderController extends BaseController
                 $orders = Speedy::getModelInstance('order')
                     ->where('valid','1')
                     ->whereIn('shops_id',$shops)
-                    ->orderBy('updated_at','DESC')
+                    ->orderBy('created_at','DESC')
                     ->paginate(10);
                 break;
         }
