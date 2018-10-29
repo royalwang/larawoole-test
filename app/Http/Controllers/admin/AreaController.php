@@ -13,7 +13,7 @@
 
         public function index()
         {
-            $area = area::where( 'valid' , '1' )->orderBy( 'created_at' , 'DESC' )->get();
+            $area = area::where( 'valid' , '1' )->orderBy( 'created_at' , 'DESC' )->paginate(10);
 
             return view( 'vendor.speedy.admin.area.index' , compact( 'area' ) );
         }

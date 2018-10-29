@@ -38,7 +38,7 @@ class EquipmentsController extends BaseController
                 $equips = Equipment::where('valid','1')->whereIn('shops_id',$shops)->orderBy('shops_id','DESC')->paginate(10);
                 break;
             case ('4'):
-                $equips = Equipment::where('valid','1')->whereIn('shops_id',$nowUser->shops_id)->paginate(10);
+                $equips = Equipment::where('valid','1')->where('shops_id',$nowUser->shops_id)->paginate(10);
                 break;
             case ('6'):
                 $teacher = Teacher::where('valid','1')->where('user_id',$nowUser->id)->first();

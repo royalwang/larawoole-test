@@ -124,6 +124,8 @@
                         ->where( 'id' , '!=' , '1' )
                         ->where( 'id' , '!=' , '2' )
                         ->where( 'id' , '!=' , '3' )
+                        ->where( 'id' , '!=' , '4' )
+                        ->where( 'id' , '!=' , '6' )
                         ->where( 'valid' , '1' )
                         ->get();
                     break;

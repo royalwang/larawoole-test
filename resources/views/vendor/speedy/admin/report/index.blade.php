@@ -26,52 +26,56 @@
                                 </div>
                             </form>
                         </div>
-                        <table class="table" style="margin-top: 30px;">
-                            <thead>
-                            <tr>
-                                <th>{{ trans('view.admin.report.name') }}</th>
-                                <th>{{ trans('view.admin.report.shop') }}</th>
-                                <th>{{ trans('view.admin.report.job') }}</th>
-                                <th>{{ trans('view.admin.public.created_at') }}</th>
-                                <th>{{ trans('view.admin.public.action') }}</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($reports as $report)
+                        @if($reports->count() == 0)
+                            @include('vendor.speedy.layouts.null_page')
+                        @else
+                            <table class="table" style="margin-top: 30px;">
+                                <thead>
                                 <tr>
-                                    <th scope="row">{{ $report->belongsToUser->display_name }}</th>
-                                    <td>{{ $report->belongsToUser->belongsToShop ? $report->belongsToUser->belongsToShop->name:'--' }}</td>
-                                    @switch($report->belongsToUser->role_id)
-                                        @case (1)
-                                        <td>超级管理员</td>
-                                        @break
-                                        @case (2)
-                                        <td>老板</td>
-                                        @break
-                                        @case (3)
-                                        <td>区域经理</td>
-                                        @break
-                                        @case (4)
-                                        <td>店长</td>
-                                        @break
-                                        @case (5)
-                                        <td>员工</td>
-                                        @break
-                                        @case (6)
-                                        <td>导师</td>
-                                        @break
-                                    @endswitch
-                                    <td>{{ $report->created_at }}</td>
-                                    <td>
-                                        <a class="btn btn-warning btn-sm"
-                                           href="{{ route('admin.report.show', ['id' => $report->id]) }}"
-                                           onclick="$('.spinner').fadeIn(50);">{{ trans('view.admin.report.view') }}</a>
-                                    </td>
+                                    <th>{{ trans('view.admin.report.name') }}</th>
+                                    <th>{{ trans('view.admin.report.shop') }}</th>
+                                    <th>{{ trans('view.admin.report.job') }}</th>
+                                    <th>{{ trans('view.admin.public.created_at') }}</th>
+                                    <th>{{ trans('view.admin.public.action') }}</th>
                                 </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        {{$reports->links()}}
+                                </thead>
+                                <tbody>
+                                @foreach($reports as $report)
+                                    <tr>
+                                        <th scope="row">{{ $report->belongsToUser->display_name }}</th>
+                                        <td>{{ $report->belongsToUser->belongsToShop ? $report->belongsToUser->belongsToShop->name:'--' }}</td>
+                                        @switch($report->belongsToUser->role_id)
+                                            @case (1)
+                                            <td>超级管理员</td>
+                                            @break
+                                            @case (2)
+                                            <td>老板</td>
+                                            @break
+                                            @case (3)
+                                            <td>区域经理</td>
+                                            @break
+                                            @case (4)
+                                            <td>店长</td>
+                                            @break
+                                            @case (5)
+                                            <td>员工</td>
+                                            @break
+                                            @case (6)
+                                            <td>导师</td>
+                                            @break
+                                        @endswitch
+                                        <td>{{ $report->created_at }}</td>
+                                        <td>
+                                            <a class="btn btn-warning btn-sm"
+                                               href="{{ route('admin.report.show', ['id' => $report->id]) }}"
+                                               onclick="$('.spinner').fadeIn(50);">{{ trans('view.admin.report.view') }}</a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            {{$reports->links()}}
+                        @endif
                     </div>
 
                 </div>
