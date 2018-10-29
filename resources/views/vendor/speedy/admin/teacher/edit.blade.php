@@ -12,7 +12,7 @@
                             {{ csrf_field() }}
                             {{ isset($teacher) ? method_field('PUT') : '' }}
                             <div class="form-group">
-                                <label>{{ trans('view.admin.teacher.manager') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.teacher.manager') }} <span style="font-size: 12px;color: red;">(最多5人)</span></label>
                                 <div class="checkbox">
                                     <?php if(isset($teacher)){$users_id = $teacher->hasManyShop->pluck('manager_id')->toArray();}?>
                                     @foreach($users as $user)

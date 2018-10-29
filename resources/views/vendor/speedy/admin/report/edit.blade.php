@@ -11,11 +11,11 @@
                         <div class="panel-body">
                             {{ csrf_field() }}
                             <div class="form-group">
-                                <label>{{ trans('view.admin.report.name') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.report.name') }}</label>
                                 <input type="text" name="name" class="form-control" value="{{$nowUser->display_name}}" readonly>
                             </div>
                             <div class="form-group">
-                                <label>{{ trans('view.admin.report.job') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.report.job') }}</label>
                                 @switch($nowUser->role_id)
                                     @case (1)
                                     <input type="text" name="job" class="form-control" value="超级管理员" readonly>
@@ -38,11 +38,11 @@
                                 @endswitch
                             </div>
                             <div class="form-group">
-                                <label>{{ trans('view.admin.report.time') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.report.time') }}</label>
                                 <input type="text" name="time" class="form-control" value="{{Carbon\Carbon::now()}}" readonly>
                             </div>
                             <div class="form-group">
-                                <label>{{ trans('view.admin.report.content') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.report.content') }}</label>
                                 <textarea rows="8" name="content" class="form-control" placeholder="" ></textarea>
                             </div>
                         </div>

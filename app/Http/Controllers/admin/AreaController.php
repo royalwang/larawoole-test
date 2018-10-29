@@ -7,7 +7,8 @@
     use Illuminate\Http\Request;
     use App\Models\area;
 
-    class AreaController extends BaseController {
+    class AreaController extends BaseController
+    {
         protected $permissionName = 'area';
 
         public function index()
@@ -35,6 +36,7 @@
          * Store a newly created resource in storage.
          *
          * @param  \Illuminate\Http\Request $request
+         *
          * @return \Illuminate\Http\Response
          */
         public function store( Request $request )
@@ -42,21 +44,30 @@
 
             $validator = $this->mustValidate( 'area.store' );
 
-            if ( $validator->fails() ) {
+            if ( $validator->fails() )
+            {
                 return redirect()->back()->withErrors( $validator )->withInput();
             }
 
-            $area = Speedy::getModelInstance( 'area' )->create( [
-                'name'    => $request->get( 'name' ) ,
-                'user_id' => $request->get( 'user_id' )
-            ] );
+            $area = Speedy::getModelInstance( 'area' )->create(
+                [
+                    'name'    => $request->get( 'name' ) ,
+                    'user_id' => $request->get( 'user_id' ) ,
+                ]
+            );
 
             $area_id = area::orderby( 'created_at' , 'DESC' )->first()->id;
 
-            foreach ( $request->get( 'shop_id' ) as $id )
-                Speedy::getModelInstance( 'shop' )->where( 'id' , $id )->where( 'valid' , '1' )->update( [
-                    'area_id' => $area_id
-                ] );
+            if ( $request->get( 'shop_id' ) )
+            {
+                foreach ( $request->get( 'shop_id' ) as $id )
+                    Speedy::getModelInstance( 'shop' )->where( 'id' , $id )->where( 'valid' , '1' )->update(
+                        [
+                            'area_id' => $area_id ,
+                        ]
+                    );
+            }
+
 
             return $area ? redirect()->route( 'admin.area.index' ) : redirect()->back()->withErrors( trans( 'view.admin.area.create_area_failed' ) )->withInput();
         }
@@ -65,6 +76,7 @@
          * Display the specified resource.
          *
          * @param  int $id
+         *
          * @return \Illuminate\Http\Response
          */
         public function show( $id )
@@ -76,6 +88,7 @@
          * Show the form for editing the specified resource.
          *
          * @param  int $id
+         *
          * @return \Illuminate\Http\Response
          */
         public function edit( $id )
@@ -94,13 +107,15 @@
          *
          * @param  \Illuminate\Http\Request $request
          * @param  int $id
+         *
          * @return \Illuminate\Http\Response
          */
         public function update( Request $request , $id )
         {
             $validator = $this->mustValidate( 'area.update' , false , 'name' , $id );
 
-            if ( $validator->fails() ) {
+            if ( $validator->fails() )
+            {
                 return redirect()->back()->withErrors( $validator )->withInput();
             }
 
@@ -109,9 +124,11 @@
             $data = [ 'name' => $payload['name'] , 'user_id' => $payload['user_id'] ];
 
             //清空现有关联
-            Shop::where( 'valid' , '1' )->where( 'area_id' , $id )->update( [
-                'area_id' => null ,
-            ] );
+            Shop::where( 'valid' , '1' )->where( 'area_id' , $id )->update(
+                [
+                    'area_id' => null ,
+                ]
+            );
 
             //重新绑定关联
             foreach ( $payload['shop_id'] as $shop_id )
@@ -126,6 +143,7 @@
          * Remove the specified resource from storage.
          *
          * @param  int $id
+         *
          * @return \Illuminate\Http\Response
          */
         public function destroy( $id )
@@ -135,9 +153,11 @@
                     'area_id' => null ,
                 ]
             );
-            $result = Speedy::getModelInstance( 'area' )->where( 'id' , $id )->update( [
-                'valid' => '0'
-            ] );
+            $result = Speedy::getModelInstance( 'area' )->where( 'id' , $id )->update(
+                [
+                    'valid' => '0' ,
+                ]
+            );
 
 
             return $result ? redirect()->route( 'admin.area.index' ) : redirect()->back()->withErrors( trans( 'view.admin.area.delete_area_failed' ) )->withInput();

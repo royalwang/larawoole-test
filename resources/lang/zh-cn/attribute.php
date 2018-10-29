@@ -4,6 +4,7 @@
         'role'    => [
             'name'         => '角色名' ,
             'display_name' => '角色显示名称' ,
+            'permission_id' => '权限内容' ,
         ] ,
         'user'    => [
             'name'         => '账号' ,
@@ -16,15 +17,22 @@
             'hire_date'    => '入职时间' ,
         ] ,
         'teacher' => [
-            'user_id' => '学员人数' ,
+            'user_id' => '学员' ,
+        ] ,
+        'area'    => [
+            'name' => '区域名称' ,
         ] ,
         'shop'    => [
             'discount' => '门店价格' ,
+            'name'     => '门店名称' ,
+            'address'  => '门店地址' ,
         ] ,
         'report'  => [
             'content' => '汇报内容' ,
         ] ,
         'equip'   => [
-            'type' => '设备类型' ,
+            'type'        => '设备类型' ,
+            'name'        => '设备名称' ,
+            'verify_code' => '设备识别码' ,
         ] ,
     ];

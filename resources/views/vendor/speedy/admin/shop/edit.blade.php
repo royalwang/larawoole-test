@@ -12,15 +12,15 @@
                             {{ csrf_field() }}
                             {{ isset($shop) ? method_field('PUT') : '' }}
                             <div class="form-group">
-                                <label>{{ trans('view.admin.shop.name') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.shop.name') }}</label>
                                 <input type="text" name="name" class="form-control" placeholder="{{ trans('view.admin.shop.name') }}" value="{{ isset($shop) ? $shop->name : '' }}">
                             </div>
                             <div class="form-group">
-                                <label>{{ trans('view.admin.shop.address') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.shop.address') }}</label>
                                 <input type="text" name="address" class="form-control" placeholder="{{ trans('view.admin.shop.address') }}" value="{{ isset($shop) ? $shop->address : '' }}">
                             </div>
                             <div class="form-group">
-                                <label>{{ trans('view.admin.shop.discount') }}(单位:元)</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.shop.discount') }}(单位:元)</label>
                                 <input type="text" name="discount" class="form-control" placeholder="{{ trans('view.admin.shop.discount') }}" value="{{ isset($shop) ? substr(sprintf("%.2f",($shop->discount)/100),0,-1) : '' }}">
                             </div>
                             <div class="form-group">

@@ -25,7 +25,7 @@
                                 @foreach($shops as $shop)
                                 <tr>
                                     <td>{{ $shop->name }}</td>
-                                    <td>{{ $shop->hasOneManager->display_name }}</td>
+                                    <td>{{ $shop->hasOneManager ? $shop->hasOneManager->display_name:'-' }}</td>
                                     <td>{{ $shop->hasManyUsers->count() }}</td>
                                     <td>{{ $shop->onWork }}</td>
                                     <td>{{ $shop->doneOrders }}</td>

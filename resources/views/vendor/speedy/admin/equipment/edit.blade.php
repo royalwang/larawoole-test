@@ -13,20 +13,20 @@
                             {{ csrf_field() }}
                             {{ isset($equip) ? method_field('PUT') : '' }}
                             <div class="form-group">
-                                <label>{{ trans('view.admin.equip.name') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.equip.name') }}</label>
                                 <input type="text" name="name" class="form-control"
                                        placeholder="{{ trans('view.admin.equip.name') }}"
                                        value="{{ isset($equip) ? $equip->name : '' }}">
                             </div>
                             <div class="form-group">
-                                <label>{{ trans('view.admin.equip.uuid') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.equip.uuid') }}</label>
                                 <input type="text" name="verify_code" class="form-control"
                                        placeholder="{{ trans('view.admin.equip.uuid') }}"
                                        value="{{ isset($equip) ? $equip->verify_code : '' }}"
                                         {{ isset($equip) ? 'readonly' : '' }}>
                             </div>
                             <div class="form-group">
-                                <label>{{ trans('view.admin.equip.type') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.equip.type') }}</label>
                                 <select name="type" class="form-control" {{ isset($equip) ? 'disabled="disabled"':''}}>
                                     <option value="1">{{ trans('view.admin.equip.money') }}</option>
                                     <option value="2">{{ trans('view.admin.equip.staff') }}</option>

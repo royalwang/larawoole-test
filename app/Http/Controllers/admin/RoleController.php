@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use Speedy;
 use Illuminate\Http\Request;
+use Auth;
 
 class RoleController extends BaseController
 {
@@ -17,9 +18,10 @@ class RoleController extends BaseController
      */
     public function index()
     {
+        $nowUser = Auth::user();
         $roles = Speedy::getModelInstance('role')->where('valid','1')->paginate(20);
 
-        return view('vendor.speedy.admin.role.index', compact('roles'));
+        return view('vendor.speedy.admin.role.index', compact('roles','nowUser'));
     }
 
     /**

@@ -27,7 +27,7 @@
                                 <tr>
                                     <th scope="row">{{ $equip->name }}</th>
                                     <td>{{ $equip->type === '1' ? '收钱终端':'员工机' }}</td>
-                                    <td>{{ $equip->belongsToShops->name }}</td>
+                                    <td>{{ $equip->belongsToShops ? $equip->belongsToShops->name:'-' }}</td>
                                     <td>{{ $equip->verify_code? $equip->verify_code:'-' }}</td>
                                 @switch($equip->status)
                                         @case('1')

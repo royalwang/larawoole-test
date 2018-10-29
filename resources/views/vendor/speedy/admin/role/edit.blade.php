@@ -12,15 +12,15 @@
                             {{ csrf_field() }}
                             {{ isset($role) ? method_field('PUT') : '' }}
                             <div class="form-group">
-                                <label>{{ trans('view.admin.role.name') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.role.name') }}</label>
                                 <input type="text" name="name" class="form-control" placeholder="{{ trans('view.admin.role.name') }}" value="{{ isset($role) ? $role->name : '' }}">
                             </div>
                             <div class="form-group">
-                                <label>{{ trans('view.admin.role.display_name') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.role.display_name') }}</label>
                                 <input type="text" name="display_name" class="form-control" placeholder="{{ trans('view.admin.role.display_name') }}" value="{{ isset($role) ? $role->display_name : '' }}">
                             </div>
                             <div class="form-group">
-                                <label>{{ trans('view.admin.role.permission') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.role.permission') }}</label>
                                 <div class="checkbox">
                                     <?php if(isset($role)){$rolePermissions = $role->permissions->pluck('id')->toArray();}?>
                                     @foreach($permissions as $permission)

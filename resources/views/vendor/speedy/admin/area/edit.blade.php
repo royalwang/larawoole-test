@@ -12,11 +12,11 @@
                             {{ csrf_field() }}
                             {{ isset($area) ? method_field('PUT') : '' }}
                             <div class="form-group">
-                                <label>{{ trans('view.admin.area.name') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.area.name') }}</label>
                                 <input type="text" name="name" class="form-control" placeholder="{{ trans('view.admin.area.name') }}" value="{{ isset($area) ? $area->name : '' }}">
                             </div>
                             <div class="form-group">
-                                <label>{{ trans('view.admin.area.user_id') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.area.user_id') }}</label>
                                 <select name="user_id" class="form-control" required>
                                     <option value="">{{ trans('view.admin.public.none') }}</option>
                                     @foreach($users as $user)

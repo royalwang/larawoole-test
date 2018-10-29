@@ -26,10 +26,12 @@
                 'update' => [
                     'name'         => 'required|max:255|unique:role,name' ,
                     'display_name' => 'required|max:255' ,
+                    'permission_id' => 'required',
                 ] ,
                 'store'  => [
                     'name'         => 'required|max:255|unique:role,name' ,
                     'display_name' => 'required|max:255' ,
+                    'permission_id' => 'required',
                 ] ,
             ] ,
             'shop'    => [
@@ -46,11 +48,13 @@
             ] ,
             'equip'   => [
                 'update' => [
-                    'name' => 'required|max:255' ,
+                    'name'        => 'required|max:255' ,
+                    'verify_code' => 'required' ,
                 ] ,
                 'store'  => [
                     'name' => 'required|max:255' ,
-                    'type' => 'required|max:255' ,
+                    'type' => 'required' ,
+                    'verify_code' => 'required' ,
                 ] ,
             ] ,
             'order'   => [
