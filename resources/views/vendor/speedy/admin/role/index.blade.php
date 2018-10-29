@@ -15,7 +15,6 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>#</th>
                                 <th>{{ trans('view.admin.role.name') }}</th>
                                 <th>{{ trans('view.admin.role.display_name') }}</th>
                                 <th>{{ trans('view.admin.public.created_at') }}</th>
@@ -25,7 +24,6 @@
                             <tbody>
                             @foreach($roles as $role)
                                 <tr>
-                                    <th scope="row">{{ $role->id }}</th>
                                     <td>{{ $role->name }}</td>
                                     <td>{{ $role->display_name }}</td>
                                     <td>{{ $role->created_at }}</td>
