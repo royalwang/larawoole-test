@@ -32,7 +32,7 @@
         {
             $schedule->command( 'machine:logout' )
                 ->everyMinute()
-                ->sendOutputTo(storage_path('daily_task'));
+                ->sendOutputTo(storage_path('daily_task.log'));
         }
 
         /**
