@@ -31,7 +31,8 @@
         protected function schedule( Schedule $schedule )
         {
             $schedule->command( 'machine:logout' )
-                ->dailyAt('09:40');
+                ->everyMinute()
+                ->sendOutputTo(storage_path('daily_task'));
         }
 
         /**
