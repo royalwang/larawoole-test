@@ -31,7 +31,7 @@
         protected function schedule( Schedule $schedule )
         {
             $schedule->command( 'machine:logout' )
-                ->everyMinute();
+                ->dailyAt('09:40');
         }
 
         /**
