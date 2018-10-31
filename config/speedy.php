@@ -58,56 +58,56 @@
         'menus' => [
             'personal'    => [
                 'display' => '修改个人信息' ,
-                'url'     => '/admin/personal' ,
+                'url'     => '/platform/speedy/admin/personal' ,
             ] ,
             'user'        => [
                 'display' => '员工账号管理' ,
-                'url'     => '/admin/user' ,
+                'url'     => '/platform/speedy/admin/user' ,
             ] ,
             'myreport'    => [
                 'display' => '我的工作报告' ,
-                'url'     => '/admin/report' ,
+                'url'     => '/platform/speedy/admin/report' ,
             ] ,
             'otherreport' => [
                 'display' => '其他工作报告' ,
-                'url'     => '/admin/otherreport' ,
+                'url'     => '/platform/speedy/admin/otherreport' ,
             ] ,
 
             'shop'    => [
                 'display' => '门店管理' ,
-                'url'     => '/admin/shop' ,
+                'url'     => '/platform/speedy/admin/shop' ,
             ] ,
             'work'    => [
                 'display' => '门店工作情况' ,
-                'url'     => '/admin/work' ,
+                'url'     => '/platform/speedy/admin/work' ,
             ] ,
             'equip'   => [
                 'display' => '门店设备管理' ,
-                'url'     => '/admin/equip' ,
+                'url'     => '/platform/speedy/admin/equip' ,
             ] ,
             'line'    => [
                 'display' => '营业报表' ,
-                'url'     => '/admin/line' ,
+                'url'     => '/platform/speedy/admin/line' ,
             ] ,
             'area'    => [
                 'display' => '区域管理' ,
-                'url'     => '/admin/area' ,
+                'url'     => '/platform/speedy/admin/area' ,
             ] ,
             'teacher' => [
                 'display' => '导师管理' ,
-                'url'     => '/admin/teacher' ,
+                'url'     => '/platform/speedy/admin/teacher' ,
             ] ,
             'order'   => [
                 'display' => '订单管理' ,
-                'url'     => '/admin/order' ,
+                'url'     => '/platform/speedy/admin/order' ,
             ] ,
             'sp'      => [
                 'display' => '故障审批' ,
-                'url'     => '/admin/sp' ,
+                'url'     => '/platform/speedy/admin/sp' ,
             ] ,
             'role'    => [
                 'display' => '权限管理' ,
-                'url'     => '/admin/role' ,
+                'url'     => '/platform/speedy/admin/role' ,
             ] ,
 
             //        'about' => [

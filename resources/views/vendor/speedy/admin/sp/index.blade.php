@@ -8,7 +8,7 @@
                     <div class="panel-heading">{{ trans('view.admin.sp.title') }}
                     </div>
                     <div class="panel-body">
-                        @if($shops == null || $shops->count() == 0)
+                        @if($shops == null || $shops->count() == 0)m
                             @include('vendor.speedy.layouts.null_page')
                         @else
                             <table class="table">
