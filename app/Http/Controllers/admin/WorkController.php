@@ -36,7 +36,7 @@
                     $shops = Shop::where( 'valid' , '1' )->paginate( 10 );
                     break;
                 case ( 3 ):
-                    $area  = $nowUser->belongsToArea->id;
+                    $area  = $nowUser->belongsToArea ? $nowUser->belongsToArea->id : null;
                     $shops = Shop::where( 'valid' , '1' )->where( 'area_id' , '=' , $area )->paginate( 10 );
                     break;
                 case ( 4 ):

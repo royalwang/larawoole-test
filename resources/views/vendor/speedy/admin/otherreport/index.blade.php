@@ -22,7 +22,7 @@
                                 </div>
                             </form>
                         </div>
-                        @if($reports->count() == 0)
+                        @if($reports == null || $reports->count() == 0  )
                             @include('vendor.speedy.layouts.null_page')
                         @else
                             <table class="table" style="margin-top: 30px;">

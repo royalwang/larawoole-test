@@ -77,7 +77,7 @@
          */
         public function edit( $id )
         {
-            $users = Speedy::getModelInstance( 'user' )->where( 'role_id' , '4' )->get();
+            $users = Speedy::getModelInstance( 'user' )->where( 'role_id' , '4' )->where('valid','1')->get();
 
             $teacher = Teacher::where( 'id' , $id )->first();
 

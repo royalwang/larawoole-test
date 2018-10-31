@@ -11,7 +11,7 @@
                            onclick="$('.spinner').fadeIn(50);">{{ trans('view.admin.public.create') .' '. trans('view.admin.equip.title') }}</a>
                     </div>
                     <div class="panel-body">
-                        @if($equips->count() == 0)
+                        @if($equips == null || $equips->count() == 0)
                             @include('vendor.speedy.layouts.null_page')
                         @else
                             <table class="table">

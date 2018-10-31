@@ -40,7 +40,7 @@
                         ->paginate( 10 );
                     break;
                 case '3': //区域经理
-                    $area_id   = $nowUser->belongsToArea->id;
+                    $area_id   = $nowUser->belongsToArea ? $nowUser->belongsToArea->id : null;
                     $shops     = Shop::where( 'area_id' , $area_id )->where( 'valid' , '1' )->get();
                     $teacherId = [];
                     $shopsId   = [];
@@ -203,11 +203,33 @@
             {
                 case ( '1' ):
                     $user = Speedy::getModelInstance( 'user' )->create( $data );
+                    //判断是否需要创建导师
+                    if ( $payload['role_id'] == '6' )
+                    {
+                        $user = Speedy::getModelInstance( 'user' )->where( 'name' , $data['name'] )->first();
+                        Speedy::getModelInstance( 'teacher' )->create(
+                            [
+                                'user_id' => $user->id ,
+                                'under_sum' => '0' ,
+                            ]
+                        );
+                    }
                     break;
                 case ( '2' ):
                     if ( $request->get( 'role_id' ) != '1' )
                     {
                         $user = Speedy::getModelInstance( 'user' )->create( $data );
+                        //判断是否需要创建导师
+                        if ( $payload['role_id'] == '6' )
+                        {
+                            $user = Speedy::getModelInstance( 'user' )->where( 'name' , $data['name'] )->first();
+                            Speedy::getModelInstance( 'teacher' )->create(
+                                [
+                                    'user_id' => $user->id ,
+                                    'under_sum' => '0' ,
+                                ]
+                            );
+                        }
                     }
                     else
                     {
@@ -220,6 +242,17 @@
                         && $request->get( 'role_id' ) != '3' )
                     {
                         $user = Speedy::getModelInstance( 'user' )->create( $data );
+                        //判断是否需要创建导师
+                        if ( $payload['role_id'] == '6' )
+                        {
+                            $user = Speedy::getModelInstance( 'user' )->where( 'name' , $data['name'] )->first();
+                            Speedy::getModelInstance( 'teacher' )->create(
+                                [
+                                    'user_id'   => $user->id ,
+                                    'under_sum' => '0' ,
+                                ]
+                            );
+                        }
                     }
                     else
                     {
