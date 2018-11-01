@@ -77,7 +77,11 @@
                                     <label><span style="color: red;"> * </span>{{ trans('view.admin.user.password') }}
                                     </label>
                                 @endif
-                                <input maxlength="6" minlength="6" name="password" type="password"
+                                <input maxlength="6"
+                                       pattern="[0-9]{6}"
+                                       name="password"
+                                       type="password"
+                                       title="请输入6位数密码..."
                                        class="form-control"
                                        id="exampleInputPassword1"
                                        placeholder="{{ trans('view.admin.user.password') }}">
