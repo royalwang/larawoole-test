@@ -107,7 +107,8 @@
             //$data = '$0034569001805001,631810131052067\r';//提交支付
             //$data = '$0034549001805001,651810161843006\r';//打印小票成功
             //$data = '$0047058001810002,800001180009,651810161843006\r';//开始接单
-            $data = '$0053068001810002,800001180009,651810161843006,M2,04\r';//销单
+            //$data = '$0053068001810002,800001180009,651810161843006,M2,04\r';//销单
+            $data = '$0018589001811002\r';//获取门店信号灯,30秒发送一次更新状态
 
             //$this->pay_code = '135800752045370032';
             //心跳包不打印日志
@@ -194,6 +195,10 @@
                 '571' => 'Pay Fail' ,
                 '540' => 'Print Success' ,
                 '550' => 'Print Success' ,
+                '580' => 'Green',
+                '581' => 'Yellow',
+                '582' => 'Red',
+                '583' => 'Light Error',
             ];
             if ( $type == 0 )
             {
@@ -668,6 +673,15 @@
                         return '551';
                     }
                     break;
+
+                //获取门店指示灯
+                case ( '58' ):
+                    $str      = explode( '\\' , $data );
+                    $equip_id = substr( $str[0] , 7 );
+                    $light    = $this->getShopLight( $equip_id );
+
+                    return '58' . $light;
+                    break;
             }
 
             return '000';
@@ -886,7 +900,7 @@
          *
          * @since 1.0
          * @return object
-         * @todo 返回值未完全，需包含排队号，优化逻辑减少请求量
+         * @todo 返回值未完全，优化逻辑减少请求量
          */
         public function updateOrder( $rdata )
         {
@@ -1413,6 +1427,49 @@
         }
 
         /**
+         * 获取门店指示灯
+         *
+         * 根据门店当前正在等待的人数决定指示灯颜色等候人数：[0,3)  绿灯，等候人数：[3,5]  黄灯，等候人数：（5，∞） 红灯，注意开闭区间
+         *
+         * @access public
+         *
+         * @param string $equip_id 机器识别码
+         *
+         * @since 1.0
+         * @return string
+         */
+        public function getShopLight( $equip_id )
+        {
+            $now   = Carbon::today();
+            $end_t = Carbon::tomorrow();
+            $equip = Equipment::where( 'verify_code' , $equip_id )->where( 'valid' , '1' )->first();
+            if ( $equip )
+            {
+                $num = $equip->belongsToShops->hasManyOrderWaiting
+                    ->where( 'created_at' , '>=' , $now )
+                    ->where( 'created_at' , '<=' , $end_t )
+                    ->count();
+                var_dump( '$num: ' . $num );
+                if ( $num < 3 )
+                {
+                    return '0';
+                }
+                else if ( $num <= 5 )
+                {
+                    return '1';
+                }
+                else
+                {
+                    return '2';
+                }
+            }
+            else
+            {
+                return '3';
+            }
+        }
+
+        /**
          * 生成CRC16校验码
          *
          * @access public
@@ -1444,3 +1501,29 @@
             return sprintf( '%04X' , $crc );
         }
     }
+
+    /**
+     *                                   ┌─┐                ┌─┐
+     *                            ┌──┘  ┴───────┘  ┴──┐
+     *                            │                                       │
+     *                            │                ───                │
+     *                            │         ─┬┘       └┬─         │
+     *                            │                                       │
+     *                            │                ─┴─                │
+     *                            │                                       │
+     *                            └───┐                    ┌───┘
+     *                                     │                    │
+     *                                     │                    │
+     *                                     │                    └──────────────┐
+     *                                     │                                                       │
+     *                                     │                                                       ├─┐
+     *                                     │                                                       ┌─┘
+     *                                     │                                                       │
+     *                                     └─┐     ┐    ┌───────┬──┐    ┌──┘
+     *                                          │  ─┤  ─┤                │  ─┤  ─┤
+     *                                          └──┴──┘               └──┴──┘
+     *
+     *                                                    Protected By God
+     *                                                            No Bug
+     *                                                    Earn More Money
+     */

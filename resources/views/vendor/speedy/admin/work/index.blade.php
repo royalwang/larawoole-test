@@ -36,7 +36,7 @@
                                     <button class="btn btn-success btn-sm"
                                     disabled>{{ trans('view.admin.work.green') }}</button>
                                     </td>
-                                    @elseif($shop->hasManyOrderWaiting->count()<5)
+                                    @elseif($shop->hasManyOrderWaiting->count() <= 5)
                                     <td>
                                     <button class="btn btn-warning btn-sm"
                                     disabled>{{ trans('view.admin.work.yellow') }}</button>
