@@ -61,7 +61,7 @@ class Shop extends Model
 
     public function hasManySp()
     {
-        return $this->hasMany('App\Models\Sp','shops_id','id')->orderByDesc('updated_at');
+        return $this->hasMany('App\Models\Sp','shops_id','id')->where('valid','=','1')->orderByDesc('updated_at');
     }
 
     public function belongsToArea()
