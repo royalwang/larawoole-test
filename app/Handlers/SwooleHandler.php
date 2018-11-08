@@ -351,7 +351,12 @@
                     {
                         if ( $equip->user_id == $user->id && Hash::check( $str[2] , $user->password ) )
                         {
-                            $equip->update( [ 'user_id' => null ] );
+                            $equip->update(
+                                [
+                                    'user_id' => null ,
+                                    'status'  => '2' ,
+                                ]
+                            );
                             Speedy::getModelInstance( 'machine_login_logout_record' )
                                 ->create(
                                     [
@@ -382,7 +387,12 @@
                                         'status'      => '2' , //店长操作标识
                                     ]
                                 );
-                            $equip->update( [ 'user_id' => null ] );
+                            $equip->update(
+                                [
+                                    'user_id' => null ,
+                                    'status'  => '2' ,
+                                ]
+                            );
 
                             return '030';//员工登出成功
                         }
