@@ -97,7 +97,7 @@
          * @since 1.0
          * @return void
          */
-        public function onReceive( $serv , $fd , $from_id , $data )
+        public function onReceive( $serv  , $fd  , $from_id  , $data  )
         {
             //心跳包不打印日志
             if ( substr( $data , 5 , 2 ) != '08' )

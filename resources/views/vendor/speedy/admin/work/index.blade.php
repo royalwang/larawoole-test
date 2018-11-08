@@ -29,8 +29,8 @@
                                     <td>{{ $shop->onWork }}</td>
                                     <td>{{ $shop->doneOrders }}</td>
                                     <td>{{ $shop->todayProfit/100 }}</td>
-                                    <td>{{ $shop->waitingOrders }}</td>
-                                    @if($shop->waitingOrders<3)
+                                    <td>{{ $shop->hasManyOrderWaiting->count() }}</td>
+                                    @if($shop->hasManyOrderWaiting->count()<3)
                                     <td>
                                     <button class="btn btn-success btn-sm"
                                     disabled>{{ trans('view.admin.work.green') }}</button>

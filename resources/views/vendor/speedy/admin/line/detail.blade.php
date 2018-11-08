@@ -9,7 +9,7 @@
                     </div>
                     <div class="panel-body">
                         <form method="post"
-                              action="{{ route('admin.line.search')}}">
+                              action="{{ route('admin.line.usersearch')}}">
                             {{ csrf_field() }}
                             {{ method_field('POST') }}
                             <div class="form-group">
@@ -24,6 +24,11 @@
                                     <input type="date" name="end_datetime" class="form-control "
                                            placeholder="{{ trans('view.admin.line.end_time') }}"
                                            value="{{ isset($end_date) ? $end_date:'' }}" required>
+                                </div>
+                                <div style="display: none;">
+                                    <input type="text" name="shop_id"
+                                           placeholder=""
+                                           value="{{ $users[0]->shops_id }}">
                                 </div>
                                 <div style="margin-top: 10px;">
                                     <button type="submit" class="btn btn-info" style="background-color: #00a0e8;">查询

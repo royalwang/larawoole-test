@@ -63,7 +63,7 @@
         }
 
         /**
-         * 营销报表日期查询
+         * 店铺营销报表日期查询
          *
          * @access public
          * @since 1.0
@@ -180,6 +180,58 @@
         }
 
         /**
+         * 员工营销报表日期查询
+         *
+         * @access public
+         * @since 1.0
+         *
+         * @param \Illuminate\Http\Request $request
+         *
+         * @return \Illuminate\Http\Response
+         */
+        public function userSearch( Request $request )
+        {
+
+            $start_time = Carbon::parse( $request->get( 'start_datetime' ) )->toDateTimeString();
+            $end_time   = Carbon::parse( $request->get( 'end_datetime' ) )->toDateTimeString();
+
+            $users = User::where( 'shops_id' , $request->get( 'shop_id' ) )
+                ->where( 'valid' , '1' )
+                ->paginate( 10 );
+            foreach ( $users as $a )
+            {
+                $orders = Orders::where( 'user_id' , $a->id )
+                    ->where( 'valid' , '1' )
+                    ->where( 'status' , '2' )
+                    ->where( 'finish_time' , '>=' , $start_time )
+                    ->where( 'finish_time' , '<=' , $end_time )
+                    ->get();
+                $a->setAttribute( 'totalOrders' , $orders->count() );
+                $a->setAttribute( 'totalProfit' , $orders->sum( 'net_amount' ) );
+                if ( $orders->count() > 0 )
+                {
+                    $efficiency = 0;
+                    foreach ( $orders as $v )
+                    {
+                        $s          = Carbon::createFromTimeString( $v->start_handle );
+                        $e          = Carbon::createFromTimeString( $v->finish_time );
+                        $dif        = $s->diffInSeconds( $e );
+                        $efficiency = $efficiency + $dif;
+                    }
+                    $a->setAttribute( 'efficiency' , intval( $efficiency / $orders->count() ) );
+                }
+                else
+                {
+                    $a->setAttribute( 'efficiency' , 0 );
+                }
+            }
+            $start_date = substr( $start_time , 0 , 10 );
+            $end_date   = substr( $end_time , 0 , 10 );
+
+            return view( 'vendor.speedy.admin.line.detail' , compact( 'users' , 'start_date' , 'end_date' ) );
+        }
+
+        /**
          * Show the form for creating a new resource.
          *
          * @return \Illuminate\Http\Response
@@ -257,7 +309,7 @@
          * @since 1.0
          *
          * @param \Illuminate\Http\Request $request
-         * @todo 详情页重新搜索时间结果错误
+         *
          * @return \Illuminate\Http\Response
          */
         public function detail( Request $request )
