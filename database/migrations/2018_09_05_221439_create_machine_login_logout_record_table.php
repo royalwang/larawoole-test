@@ -19,7 +19,7 @@ class CreateMachineLoginLogoutRecordTable extends Migration
             $table->string('user_id')->nullable();
             $table->string('type',1)->nullable(); // 0:登入 , 1:登出
             $table->string('verify_code')->nullable();
-            $table->string('status',1)->nullable(); // 0:正常 , 1:异常
+            $table->string('status',1)->nullable(); // 0:正常 , 1:异常 , 2:店长操作
         });
     }
 

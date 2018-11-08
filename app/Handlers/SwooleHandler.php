@@ -35,7 +35,7 @@
          * @since 1.0
          * @return void
          */
-        public function printLog( $sig = '' , $serv = '' , $fd = '' , $from_id = '' , $data = '' )
+        public function printLog( $sig , $serv = '' , $fd = '' , $from_id = '' , $data = '' )
         {
             switch ( $sig )
             {
@@ -152,9 +152,8 @@
                 '021' => 'Login Fail' ,
                 '022' => 'Not Exist Staff' ,
                 '023' => 'Occupy' ,
-                '030' => 'Staff Logout Success' ,
-                '031' => 'Manager Logout Success' ,
-                '032' => 'Logout Fail' ,
+                '030' => 'Logout Success' ,
+                '031' => 'Logout Fail' ,
                 '040' => 'Command Success' ,
                 '041' => 'Command Fail' ,
                 '050' => 'Order Start' ,
@@ -233,6 +232,7 @@
             //$crc = $this->crc16_modbus(substr($sendData,1,-1)); //读取CRC16校验码
 
             $sendData .= '\r';//数据结尾
+
             $serv->send( $fd , $this->message( $sendData , '1' ) );
         }
 
@@ -344,12 +344,13 @@
                     $str   = explode( ',' , $data );
                     $equip = Equipment::where( 'verify_code' , substr( $str[0] , 7 ) )->first();
                     $user  = User::where( 'work_id' , $str[1] )->first();
+                    $type  = substr( $str[3] , 0 , 1 );
 
-                    if ( Hash::check( $str[2] , $user->password ) )
+                    //员工登出
+                    if ( $type == '0' )
                     {
-                        if ( $user->role_id == '5' && $user->id == $equip->user_id )
+                        if ( $equip->user_id == $user->id && Hash::check( $str[2] , $user->password ) )
                         {
-
                             $equip->update( [ 'user_id' => null ] );
                             Speedy::getModelInstance( 'machine_login_logout_record' )
                                 ->create(
@@ -362,34 +363,33 @@
                                 );
 
                             return '030';//员工登出成功
-
-                        }
-                        else if ( $user->role_id != '5' )
-                        {
-                            $equip->update( [ 'user_id' => null ] );
-                            Speedy::getModelInstance( 'machine_login_logout_record' )
-                                ->create(
-                                    [
-                                        'user_id'     => $user->id ,
-                                        'verify_code' => $equip->verify_code ,
-                                        'type'        => '1' ,
-                                        'status'      => '0' ,
-                                    ]
-                                );
-
-                            return '031';//管理员强制登出员工账号成功
-
                         }
                         else
                         {
-
-                            return '032';
-
+                            return '031';//员工登出失败
                         }
                     }
                     else
                     {
-                        return '032';//登出失败
+                        if ( $equip->user_id && Hash::check( $str[2] , $user->password ) )
+                        {
+                            Speedy::getModelInstance( 'machine_login_logout_record' )
+                                ->create(
+                                    [
+                                        'user_id'     => $equip->user_id ,
+                                        'verify_code' => $equip->verify_code ,
+                                        'type'        => '1' ,
+                                        'status'      => '2' , //店长操作标识
+                                    ]
+                                );
+                            $equip->update( [ 'user_id' => null ] );
+
+                            return '030';//员工登出成功
+                        }
+                        else
+                        {
+                            return '031';//员工登出失败
+                        }
                     }
                     break;
 

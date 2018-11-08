@@ -103,12 +103,14 @@
             //测试接收代码
             //$data = '$0034579001805001,641810130840057\r';//查询订单
             //$data = '$0018529001805001\r';//查询价格
-            //$data = '$0037539001805001,123456789012345678\r';//创建订单
+            //$data = '$0037539001805001,135487390872883290\r';//创建订单
             //$data = '$0034569001805001,631810131052067\r';//提交支付
             //$data = '$0034549001805001,651810161843006\r';//打印小票成功
             //$data = '$0047058001810002,800001180009,651810161843006\r';//开始接单
             //$data = '$0053068001810002,800001180009,651810161843006,M2,04\r';//销单
-            $data = '$0018589001811002\r';//获取门店信号灯,30秒发送一次更新状态
+            //data = '$0018589001811002\r';//获取门店信号灯,30秒发送一次更新状态
+            //$data = '$0038028001810005,441418070002,112233\r'; //登录员工机
+            $data = '$0040038001810004,441418070002,112233,1\r'; //登出员工机
 
             //$this->pay_code = '135800752045370032';
             //心跳包不打印日志
@@ -164,9 +166,8 @@
                 '021' => 'Login Fail' ,
                 '022' => 'Not Exist Staff' ,
                 '023' => 'Occupy' ,
-                '030' => 'Staff Logout Success' ,
-                '031' => 'Manager Logout Success' ,
-                '032' => 'Logout Fail' ,
+                '030' => 'Logout Success' ,
+                '031' => 'Logout Fail' ,
                 '040' => 'Command Success' ,
                 '041' => 'Command Fail' ,
                 '050' => 'Order Start' ,
@@ -195,10 +196,10 @@
                 '571' => 'Pay Fail' ,
                 '540' => 'Print Success' ,
                 '550' => 'Print Success' ,
-                '580' => 'Green',
-                '581' => 'Yellow',
-                '582' => 'Red',
-                '583' => 'Light Error',
+                '580' => 'Green' ,
+                '581' => 'Yellow' ,
+                '582' => 'Red' ,
+                '583' => 'Light Error' ,
             ];
             if ( $type == 0 )
             {
@@ -357,12 +358,13 @@
                     $str   = explode( ',' , $data );
                     $equip = Equipment::where( 'verify_code' , substr( $str[0] , 7 ) )->first();
                     $user  = User::where( 'work_id' , $str[1] )->first();
+                    $type  = substr( $str[3] , 0 , 1 );
 
-                    if ( Hash::check( $str[2] , $user->password ) )
+                    //员工登出
+                    if ( $type == '0' )
                     {
-                        if ( $user->role_id == '5' && $user->id == $equip->user_id )
+                        if ( $equip->user_id == $user->id && Hash::check( $str[2] , $user->password ) )
                         {
-
                             $equip->update( [ 'user_id' => null ] );
                             Speedy::getModelInstance( 'machine_login_logout_record' )
                                 ->create(
@@ -375,34 +377,33 @@
                                 );
 
                             return '030';//员工登出成功
-
-                        }
-                        else if ( $user->role_id != '5' )
-                        {
-                            $equip->update( [ 'user_id' => null ] );
-                            Speedy::getModelInstance( 'machine_login_logout_record' )
-                                ->create(
-                                    [
-                                        'user_id'     => $user->id ,
-                                        'verify_code' => $equip->verify_code ,
-                                        'type'        => '1' ,
-                                        'status'      => '0' ,
-                                    ]
-                                );
-
-                            return '031';//管理员强制登出员工账号成功
-
                         }
                         else
                         {
-
-                            return '032';
-
+                            return '031';//员工登出失败
                         }
                     }
                     else
                     {
-                        return '032';//登出失败
+                        if ( $equip->user_id && Hash::check( $str[2] , $user->password ) )
+                        {
+                            Speedy::getModelInstance( 'machine_login_logout_record' )
+                                ->create(
+                                    [
+                                        'user_id'     => $equip->user_id ,
+                                        'verify_code' => $equip->verify_code ,
+                                        'type'        => '1' ,
+                                        'status'      => '2' , //店长操作标识
+                                    ]
+                                );
+                            $equip->update( [ 'user_id' => null ] );
+
+                            return '030';//员工登出成功
+                        }
+                        else
+                        {
+                            return '031';//员工登出失败
+                        }
                     }
                     break;
 
