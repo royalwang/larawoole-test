@@ -257,7 +257,7 @@
          * @since 1.0
          *
          * @param \Illuminate\Http\Request $request
-         *
+         * @todo 详情页重新搜索时间结果错误
          * @return \Illuminate\Http\Response
          */
         public function detail( Request $request )

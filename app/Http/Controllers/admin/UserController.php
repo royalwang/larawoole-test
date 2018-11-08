@@ -29,7 +29,7 @@
                 case '1': //超级管理员
                     $users = User::where( 'valid' , '1' )
                         ->where( 'id' , '!=' , $nowUser->id )
-                        ->orderby( 'role_id' , 'ASC' )->paginate( 10 );
+                        ->orderby( 'role_id' , 'ASC' )->paginate( 15 );
                     break;
                 case '2': //老板
                     $users = User::where( 'role_id' , '!=' , '1' )
@@ -37,7 +37,7 @@
                         ->where( 'id' , '!=' , $nowUser->id )
                         ->where( 'valid' , '1' )
                         ->orderby( 'role_id' , 'ASC' )
-                        ->paginate( 10 );
+                        ->paginate( 15 );
                     break;
                 case '3': //区域经理
                     $area_id   = $nowUser->belongsToArea ? $nowUser->belongsToArea->id : null;
@@ -57,7 +57,7 @@
                         ->where( 'id' , '!=' , $nowUser->id )
                         ->where( 'valid' , '1' )
                         ->orderby( 'role_id' , 'DESC' )
-                        ->paginate( 10 );
+                        ->paginate( 15 );
                     break;
                 case '6': //导师
                     $shops   = Shop::where( 'teacher_id' , $nowUser->id )->get();
@@ -70,7 +70,7 @@
                         ->where( 'valid' , '1' )
                         ->where( 'id' , '!=' , $nowUser->id )
                         ->orderby( 'role_id' , 'ASC' )
-                        ->paginate( 10 );
+                        ->paginate( 15 );
                     break;
                 case '4': //店长
                     $users = User::where( 'role_id' , '=' , '5' )
@@ -78,10 +78,10 @@
                         ->where( 'id' , '!=' , $nowUser->id )
                         ->where( 'valid' , '1' )
                         ->orderby( 'role_id' , 'DESC' )
-                        ->paginate( 10 );
+                        ->paginate( 15 );
                     break;
                 default:
-                    $users = User::where( 'valid' , '1' )->paginate( 10 );
+                    $users = User::where( 'valid' , '1' )->paginate( 15 );
                     break;
             }
 

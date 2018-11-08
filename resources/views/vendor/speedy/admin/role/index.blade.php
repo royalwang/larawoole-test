@@ -4,44 +4,44 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">{{ trans('view.admin.role.title') }}
+                <div class="panel panel-info">
+                    <div class="panel-heading">
                         @if($nowUser->role_id == '1')
-                            <a href="{{ route('admin.role.create') }}" style="float: right;" class="btn btn-info btn-sm"
+                            <a href="{{ route('admin.role.create') }}" class="btn btn-info"
+                               style="background-color: #00a0e8;"
                                onclick="$('.spinner').fadeIn(50);">{{ trans('view.admin.public.create') .' '. trans('view.admin.role.title') }}</a>
+                        @else
+                            {{ trans('view.admin.role.title') }}
                         @endif
                     </div>
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
+                    <table class="table table-bordered table-hover" style="text-align: center">
+                        <thead>
+                        <tr class="active" style="text-align: center">
+                            <th style="text-align: center">{{ trans('view.admin.role.name') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.role.display_name') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.public.created_at') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.public.action') }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($roles as $role)
                             <tr>
-                                <th>{{ trans('view.admin.role.name') }}</th>
-                                <th>{{ trans('view.admin.role.display_name') }}</th>
-                                <th>{{ trans('view.admin.public.created_at') }}</th>
-                                <th>{{ trans('view.admin.public.action') }}</th>
+                                <td>{{ $role->name }}</td>
+                                <td>{{ $role->display_name }}</td>
+                                <td>{{ $role->created_at }}</td>
+                                <td>
+                                    <a class="btn btn-info btn-sm"
+                                       href="{{ route('admin.role.edit', ['id' => $role->id]) }}"
+                                       onclick="$('.spinner').fadeIn(50);">{{ trans('view.admin.public.edit') }}</a>
+                                    <a class="btn btn-danger btn-sm" href="javascript:;"
+                                       onclick="document.getElementById('delete-form').action = '{{ route('admin.role.index') . "/{$role->id}" }}'"
+                                       data-toggle="modal"
+                                       data-target="#deleteModal">{{ trans('view.admin.public.destroy') }}</a>
+                                </td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($roles as $role)
-                                <tr>
-                                    <td>{{ $role->name }}</td>
-                                    <td>{{ $role->display_name }}</td>
-                                    <td>{{ $role->created_at }}</td>
-                                    <td>
-                                        <a class="btn btn-warning btn-sm"
-                                           href="{{ route('admin.role.edit', ['id' => $role->id]) }}"
-                                           onclick="$('.spinner').fadeIn(50);">{{ trans('view.admin.public.edit') }}</a>
-                                        <a class="btn btn-danger btn-sm" href="javascript:;"
-                                           onclick="document.getElementById('delete-form').action = '{{ route('admin.role.index') . "/{$role->id}" }}'"
-                                           data-toggle="modal"
-                                           data-target="#deleteModal">{{ trans('view.admin.public.destroy') }}</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-
+                        @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

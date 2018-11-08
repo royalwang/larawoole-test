@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 @include('vendor.speedy.partials.alert')
-                <div class="panel panel-default">
+                <div class="panel panel-info">
                     <div class="panel-heading">{{ trans('view.admin.public.' . (isset($role) ? 'edit' : 'create')) . ' ' . trans('view.admin.role.title') }}</div>
                     <form method="post" action="{{ isset($role) ? route('admin.role.update', ['id' => $role->id]) :  route('admin.role.store') }}">
                         <div class="panel-body">

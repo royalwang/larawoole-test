@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 @include('vendor.speedy.partials.alert')
-                <div class="panel panel-default">
+                <div class="panel panel-info">
                     <div class="panel-heading">{{ trans('view.admin.report.title') }}</div>
                     <form>
                         <div class="panel-body">

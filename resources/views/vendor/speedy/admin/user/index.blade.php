@@ -4,56 +4,55 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">{{ trans('view.admin.user.title') }}
-                        <a class="btn btn-info btn-sm" href="{{ route('admin.user.create') }}" style="float: right;"
-                           onclick="$('.spinner').fadeIn(50);">{{ trans('view.admin.public.create') .' '. trans('view.admin.user.title') }}</a>
+                <div class="panel panel-info">
+                    <div class="panel-heading"><a class="btn btn-info" href="{{ route('admin.user.create') }}"
+                                                  style="background-color: #00a0e8;"
+                                                  onclick="$('.spinner').fadeIn(50);">{{ trans('view.admin.public.create') .' '. trans('view.admin.user.title') }}</a>
                     </div>
-                    <div class="panel-body">
-                        <table class="table">
-                            <thead>
+                    {{--<div class="panel-body"></div>--}}
+                    <table class="table table-bordered table-hover" style="text-align: center">
+                        <thead>
+                        <tr class="active" style="text-align: center">
+                            <th style="text-align: center">{{ trans('view.admin.user.name') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.user.role') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.user.display_name') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.user.work_id') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.user.identity') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.user.sex') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.user.hire_date') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.user.shop') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.public.created_at') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.public.action') }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @foreach($users as $user)
                             <tr>
-                                <th>{{ trans('view.admin.user.name') }}</th>
-                                <th>{{ trans('view.admin.user.role') }}</th>
-                                <th>{{ trans('view.admin.user.display_name') }}</th>
-                                <th>{{ trans('view.admin.user.work_id') }}</th>
-                                <th>{{ trans('view.admin.user.identity') }}</th>
-                                <th>{{ trans('view.admin.user.sex') }}</th>
-                                <th>{{ trans('view.admin.user.hire_date') }}</th>
-                                <th>{{ trans('view.admin.user.shop') }}</th>
-                                <th>{{ trans('view.admin.public.created_at') }}</th>
-                                <th>{{ trans('view.admin.public.action') }}</th>
+                                <td>{{ $user->name }}</th>
+                                <td>{{ $user->role ? $user->role->display_name : '-' }}</td>
+                                <td>{{ $user->display_name ? $user->display_name : '-' }}</td>
+                                <td>{{ $user->work_id ? $user->work_id : '-' }}</td>
+                                <td>{{ $user->identity ? $user->identity : '-' }}</td>
+                                <td>{{ $user->sex == '0' ? '男' : '女' }}</td>
+                                <td>{{ $user->hire_date ? $user->hire_date : '-' }}</td>
+                                <td>{{ $user->belongsToShop ? $user->belongsToShop->name : '-' }}</td>
+                                <td>{{ $user->created_at }}</td>
+                                <td>
+                                    <a class="btn btn-info btn-sm"
+                                       href="{{ route('admin.user.edit', ['id' => $user->id]) }}"
+                                       onclick="$('.spinner').fadeIn(50);">{{ trans('view.admin.public.edit') }}</a>
+                                    <a class="btn btn-danger btn-sm" href="javascript:;"
+                                       onclick="document.getElementById('delete-form').action = '{{ route('admin.user.index') . "/{$user->id}" }}'"
+                                       data-toggle="modal"
+                                       data-target="#deleteModal">{{ trans('view.admin.public.destroy') }}</a>
+                                </td>
                             </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($users as $user)
-                                <tr>
-                                    <th scope="row">{{ $user->name }}</th>
-                                    <td>{{ $user->role ? $user->role->display_name : '-' }}</td>
-                                    <td>{{ $user->display_name ? $user->display_name : '-' }}</td>
-                                    <td>{{ $user->work_id ? $user->work_id : '-' }}</td>
-                                    <td>{{ $user->identity ? $user->identity : '-' }}</td>
-                                    <td>{{ $user->sex == '0' ? '男' : '女' }}</td>
-                                    <td>{{ $user->hire_date ? $user->hire_date : '-' }}</td>
-                                    <td>{{ $user->belongsToShop ? $user->belongsToShop->name : '-' }}</td>
-                                    <td>{{ $user->created_at }}</td>
-                                    <td>
-                                        <a class="btn btn-warning btn-sm"
-                                           href="{{ route('admin.user.edit', ['id' => $user->id]) }}"
-                                           onclick="$('.spinner').fadeIn(50);">{{ trans('view.admin.public.edit') }}</a>
-                                        <a class="btn btn-danger btn-sm" href="javascript:;"
-                                           onclick="document.getElementById('delete-form').action = '{{ route('admin.user.index') . "/{$user->id}" }}'"
-                                           data-toggle="modal"
-                                           data-target="#deleteModal">{{ trans('view.admin.public.destroy') }}</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        {{ $users->links() }}
-                    </div>
-
+                        @endforeach
+                        </tbody>
+                    </table>
+                    <div class="panel-footer">{{ $users->links() }}</div>
                 </div>
+
             </div>
         </div>
     </div>

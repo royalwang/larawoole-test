@@ -4,20 +4,22 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
+                <div class="panel panel-info">
                     <div class="panel-heading">{{ trans('view.admin.sp.title').' - '.trans('view.admin.sp.detail') }}
                     </div>
-                    <div class="panel-body">
-                        <table class="table">
+                    @if($sps == null || $sps->count() == 0)
+                        @include('vendor.speedy.layouts.null_page')
+                    @else
+                        <table class="table table-bordered table-hover" style="text-align: center">
                             <thead>
-                            <tr>
-                                <th>{{ trans('view.admin.sp.name') }}</th>
-                                <th>{{ trans('view.admin.sp.status') }}</th>
-                                <th>{{ trans('view.admin.sp.result') }}
-                                <th>{{ trans('view.admin.sp.user_id') }}</th>
-                                <th>{{ trans('view.admin.sp.bz_id') }}</th>
-                                <th>{{ trans('view.admin.public.created_at') }}</th>
-                                <th>{{ trans('view.admin.public.action') }}</th>
+                            <tr class="active" style="text-align: center">
+                                <th style="text-align: center">{{ trans('view.admin.sp.name') }}</th>
+                                <th style="text-align: center">{{ trans('view.admin.sp.status') }}</th>
+                                <th style="text-align: center">{{ trans('view.admin.sp.result') }}
+                                <th style="text-align: center">{{ trans('view.admin.sp.user_id') }}</th>
+                                <th style="text-align: center">{{ trans('view.admin.sp.bz_id') }}</th>
+                                <th style="text-align: center">{{ trans('view.admin.public.created_at') }}</th>
+                                <th style="text-align: center">{{ trans('view.admin.public.action') }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -36,10 +38,12 @@
                                     <td>{{ $sp->created_at }}</td>
                                     <td>
                                         @if($sp->status == '0')
-                                            <input id={{"pass"."-".$sp->id}} type="button" class="btn btn-success" value="通过"
+                                            <input id={{"pass"."-".$sp->id}} type="button" class="btn btn-success"
+                                                   value="通过"
                                                    data-toggle="modal" data-target="#confirmModal"
                                                    onclick="check_btn(id)">
-                                            <input id={{"reject"."-".$sp->id}} type="button" class="btn btn-warning" value="拒绝"
+                                            <input id={{"reject"."-".$sp->id}} type="button" class="btn btn-warning"
+                                                   value="拒绝"
                                                    data-toggle="modal" data-target="#confirmModal"
                                                    onclick="check_btn(id)">
                                         @else
@@ -51,9 +55,8 @@
                             @endforeach
                             </tbody>
                         </table>
-                        {{$sps->links()}}
-                    </div>
-
+                        <div class="panel-footer">{{ $sps->links() }}</div>
+                    @endif
                 </div>
             </div>
         </div>

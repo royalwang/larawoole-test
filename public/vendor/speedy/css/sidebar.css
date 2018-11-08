@@ -1,5 +1,5 @@
 body {
-    font-family: '微软雅黑 Light', '微软雅黑','黑体', sans-serif;
+    font-family: 'Microsoft JhengHei UI ','微软雅黑 Light', '微软雅黑','黑体', sans-serif;
     font-size: 14px;
     line-height: 1.6;
     color: #636b6f;
@@ -24,19 +24,22 @@ body {
 
 @media (min-width: 992px) {
     .container {
-        width: 720px;
+        /*width: 720px;*/
+        width: 95%;
     }
 }
 
 @media (min-width: 1200px) {
     .container {
-        width: 920px;
+        /*width: 920px;*/
+        width: 95%;
     }
 }
 
 @media (min-width: 1366px) {
     .container {
-        width: 1170px;
+        /*width: 1170px;*/
+        width: 95%;
     }
 }
 
@@ -50,7 +53,7 @@ body {
     top: 0;
     left: 0;
     height: 100%;
-    background-color: #264653;
+    background-color: #595757;
 }
 
 .sidebar .sidebar-brand {
@@ -89,7 +92,7 @@ body {
     display: block;
     text-decoration: none;
     line-height: 50px;
-    color: #677d86;
+    color:rgb(150,150,150) ;
     cursor: pointer;
     transition: all 0.3s;
 
@@ -97,15 +100,15 @@ body {
 
 .sidebar .sidebar-body a:hover {
     text-align: center;
-    background-color: #2A9D8F;
-    color: #bfe1dd;
+    background-color: #00a0e8;
+    color: #fff;
     font-weight: 100;
 }
 
 .sidebar .sidebar-body a.first-menu.active{
     text-align: center;
     color: #fff;
-    background-color: #2A9D8F;
+    background-color: #00a0e8;
     font-weight: 100;
     font-size: 16px;
 }

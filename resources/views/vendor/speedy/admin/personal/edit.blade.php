@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 @include('vendor.speedy.partials.alert')
-                <div class="panel panel-default">
+                <div class="panel panel-info">
                     <div class="panel-heading">{{ trans('view.admin.public.edit') . ' ' . trans('view.admin.user.title') }}</div>
                     <form method="post"
                           action="{{ isset($user) ? route('admin.personal.update', ['id' => $user->id]) :  route('admin.personal.store') }}">
@@ -61,7 +61,7 @@
                         </div>
                         <div class="panel-footer">
                             <button type="submit"
-                                    class="btn btn-success">{{ trans('view.admin.public.submit') }}</button>
+                                    class="btn btn-info">{{ trans('view.admin.public.submit') }}</button>
                         </div>
                     </form>
                 </div>

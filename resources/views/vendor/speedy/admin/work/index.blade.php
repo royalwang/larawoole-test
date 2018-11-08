@@ -4,21 +4,20 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
+                <div class="panel panel-info">
                     <div class="panel-heading">{{ trans('view.admin.work.title') }}
                     </div>
-                    <div class="panel-body">
-                        <table class="table">
+                        <table class="table table-bordered table-hover" style="text-align: center">
                             <thead>
-                                <tr>
-                                    <th>{{ trans('view.admin.work.shop') }}</th>
-                                    <th>{{ trans('view.admin.work.manager') }}</th>
-                                    <th>{{ trans('view.admin.work.staff_num') }}</th>
-                                    <th>{{ trans('view.admin.work.today_staff') }}
-                                    <th>{{ trans('view.admin.work.today_order_num') }}
-                                    <th>{{ trans('view.admin.work.profit') }}
-                                    <th>{{ trans('view.admin.work.waiting') }}</th>
-                                    <th>{{ trans('view.admin.work.hint') }}</th>
+                                <tr class="active" style="text-align: center">
+                                    <th style="text-align: center">{{ trans('view.admin.work.shop') }}</th>
+                                    <th style="text-align: center">{{ trans('view.admin.work.manager') }}</th>
+                                    <th style="text-align: center">{{ trans('view.admin.work.staff_num') }}</th>
+                                    <th style="text-align: center">{{ trans('view.admin.work.today_staff') }}
+                                    <th style="text-align: center">{{ trans('view.admin.work.today_order_num') }}
+                                    <th style="text-align: center">{{ trans('view.admin.work.profit') }}
+                                    <th style="text-align: center">{{ trans('view.admin.work.waiting') }}</th>
+                                    <th style="text-align: center">{{ trans('view.admin.work.hint') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,9 +50,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{$shops->links()}}
-                    </div>
-
+                    <div class="panel-footer">{{ $shops->links() }}</div>
                 </div>
             </div>
         </div>

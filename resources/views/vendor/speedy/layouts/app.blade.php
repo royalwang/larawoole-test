@@ -52,9 +52,11 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}" style="color: #5c5b4b;">
-                        {{ config('app.name', 'Laravel') }} - Information Management System
-                    </a>
+                    {{--<a class="navbar-brand" href="{{ url('/') }}" style="color: #5c5b4b;">--}}
+                        {{--{{ config('app.name', 'Laravel') }} - Information Management System--}}
+                        {{--<img src="{{asset('pic/singcut-logo.png')}}" style="width: 100px;">--}}
+                    {{--</a>--}}
+                    <img src="{{asset('pic/singcut-logo.png')}}" style="width: 100px;">
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -72,7 +74,7 @@
                         @else
                             <li class="dropdown" style="background-color: #2A9D8F;">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-expanded="false" style="color: #fff;background-color: #2A9D8F;">
+                                   aria-expanded="false" style="color: #fff;background-color: #00a0e8;">
                                     {{ Auth::user()->role ? Auth::user()->role->display_name.' - ':'' }} {{ Auth::user()->display_name }}
                                     <span class="caret"></span>
                                 </a>
@@ -81,7 +83,7 @@
                                     <li>
                                         <a href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();" style="color:  #2A9D8F;">
+                                                        document.getElementById('logout-form').submit();" style="color:  #00a0e8;">
                                             登出
                                         </a>
 
