@@ -27,7 +27,9 @@
         {
             $users = Speedy::getModelInstance( 'user' )->where( 'valid' , '1' )->where( 'role_id' , '4' )->get();
 
-            return view( 'vendor.speedy.admin.shop.edit' , compact( 'users' ) );
+            $cities = Speedy::getModelInstance( 'city_code' )->where( 'valid' , '1' )->get();
+
+            return view( 'vendor.speedy.admin.shop.edit' , compact( 'users' , 'cities' ) );
         }
 
         /**
@@ -51,6 +53,7 @@
                 [
                     'name'           => $request->get( 'name' ) ,
                     'address'        => $request->get( 'address' ) ,
+                    'city_code'      => $request->get( 'city' ) ,
                     'establish_time' => $request->get( 'establish_time' ) ,
                     'manager_id'     => $request->get( 'manager_id' ) ,
                     'discount'       => substr( sprintf( "%.2f" , $request->get( 'discount' ) ) , 0 , -1 ) * 100 ,
@@ -66,7 +69,6 @@
                     ]
                 );
             }
-
 
             return $result ? redirect()->route( 'admin.shop.index' ) : redirect()->back()->withErrors( trans( 'view.admin.shop.create_shop_failed' ) )->withInput();
         }
@@ -96,7 +98,9 @@
 
             $users = Speedy::getModelInstance( 'user' )->where( 'valid' , '1' )->where( 'role_id' , '4' )->get();
 
-            return view( 'vendor.speedy.admin.shop.edit' , compact( 'shop' , 'users' ) );
+            $cities = Speedy::getModelInstance( 'city_code' )->where( 'valid' , '1' )->get();
+
+            return view( 'vendor.speedy.admin.shop.edit' , compact( 'shop' , 'users' , 'cities' ) );
         }
 
         /**

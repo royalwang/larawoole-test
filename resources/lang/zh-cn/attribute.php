@@ -2,8 +2,8 @@
 
     return [
         'role'    => [
-            'name'         => '角色名' ,
-            'display_name' => '角色显示名称' ,
+            'name'          => '角色名' ,
+            'display_name'  => '角色显示名称' ,
             'permission_id' => '权限内容' ,
         ] ,
         'user'    => [
@@ -15,6 +15,7 @@
             'sex'          => '性别' ,
             'identity'     => '身份证号码' ,
             'hire_date'    => '入职时间' ,
+            'shop_id'   =>  '门店',
         ] ,
         'teacher' => [
             'user_id' => '学员' ,
@@ -26,6 +27,7 @@
             'discount' => '门店价格' ,
             'name'     => '门店名称' ,
             'address'  => '门店地址' ,
+            'city'     => '所在城市' ,
         ] ,
         'report'  => [
             'content' => '汇报内容' ,

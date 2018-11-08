@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers\admin;
 
+    use App\Models\CityCode;
     use App\Models\Shop;
     use App\Models\Sp;
     use App\Models\Teacher;
@@ -156,7 +157,6 @@
          */
         public function store( Request $request )
         {
-
             $payload = $request->all();
 
             $nowUser = Auth::user();
@@ -168,7 +168,9 @@
                 return redirect()->back()->withErrors( $validator )->withInput();
             }
 
-            $ful_str = $this->createWorkId( $payload['identity'] , $payload['hire_date'] );
+            $city_code = Speedy::getModelInstance('shop')->where('id',$payload['shop_id'])->first()->hasOneCity->code;
+
+            $ful_str = $this->createWorkId( $city_code , $payload['hire_date'] );
 
             //表单必填数据
             $data = [
@@ -209,7 +211,7 @@
                         $user = Speedy::getModelInstance( 'user' )->where( 'name' , $data['name'] )->first();
                         Speedy::getModelInstance( 'teacher' )->create(
                             [
-                                'user_id' => $user->id ,
+                                'user_id'   => $user->id ,
                                 'under_sum' => '0' ,
                             ]
                         );
@@ -225,7 +227,7 @@
                             $user = Speedy::getModelInstance( 'user' )->where( 'name' , $data['name'] )->first();
                             Speedy::getModelInstance( 'teacher' )->create(
                                 [
-                                    'user_id' => $user->id ,
+                                    'user_id'   => $user->id ,
                                     'under_sum' => '0' ,
                                 ]
                             );
@@ -688,18 +690,20 @@
         /**
          * 自动生成不重复员工号
          *
+         * 例如：张XX，广东省广州市（店铺所属省份和市代码），入职时间是2018年10月。员工号码就是440118100001（后4位数按顺序累加）
+         *
          * @param string $identity 身份证号码
          * @param string $hire_date 入职时间
          *
          * @since 1.0
          * @return string
          */
-        public function createWorkId( $identity , $hire_date )
+        public function createWorkId( $city_code , $hire_date )
         {
             $work_id_8 = [];
             $num       = 1;
             $full_str  = '';
-            $head_mid  = substr( $identity , 0 , 4 ) . substr( $hire_date , 2 , 2 ) . substr( $hire_date , 5 , 2 );
+            $head_mid  = $city_code . substr( $hire_date , 2 , 2 ) . substr( $hire_date , 5 , 2 );
             $users     = Speedy::getModelInstance( 'user' )->where( 'valid' , '1' )->get();
             foreach ( $users as $v )
             {

@@ -87,7 +87,7 @@
                                        placeholder="{{ trans('view.admin.user.password') }}">
                             </div>
                             <div class="form-group">
-                                <label>{{ trans('view.admin.user.shop') }}</label>
+                                <label><span style="color: red;"> * </span>{{ trans('view.admin.user.shop') }}</label>
                                 <select name="shop_id" class="form-control">
                                     @if(isset($user->shops_id))
                                         @foreach($shops as $shop)

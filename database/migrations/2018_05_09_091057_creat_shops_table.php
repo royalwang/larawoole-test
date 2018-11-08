@@ -22,6 +22,7 @@ class CreateShopsTable extends Migration
             $table->string('area_id')->default(null)->nullable();
             $table->string('teacher_id')->default(null)->nullable();
             $table->string('address');
+            $table->string('city_code')->default(null)->nullable();
             $table->timestamp('establish_time')->default(null)->nullable();
             $table->string('valid',1)->default('1');
             $table->string('discount')->nullable();

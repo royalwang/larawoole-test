@@ -20,18 +20,19 @@
                     'password'     => 'required' ,
                     'display_name' => 'required' ,
                     'hire_date'    => 'required' ,
+                    'shop_id'   => 'required',
                 ] ,
             ] ,
             'role'    => [
                 'update' => [
-                    'name'         => 'required|max:255|unique:role,name' ,
-                    'display_name' => 'required|max:255' ,
-                    'permission_id' => 'required',
+                    'name'          => 'required|max:255|unique:role,name' ,
+                    'display_name'  => 'required|max:255' ,
+                    'permission_id' => 'required' ,
                 ] ,
                 'store'  => [
-                    'name'         => 'required|max:255|unique:role,name' ,
-                    'display_name' => 'required|max:255' ,
-                    'permission_id' => 'required',
+                    'name'          => 'required|max:255|unique:role,name' ,
+                    'display_name'  => 'required|max:255' ,
+                    'permission_id' => 'required' ,
                 ] ,
             ] ,
             'shop'    => [
@@ -44,6 +45,7 @@
                     'name'     => 'required|max:255' ,
                     'address'  => 'required|max:255' ,
                     'discount' => 'required|numeric' ,
+                    'city'     => 'required' ,
                 ] ,
             ] ,
             'equip'   => [
@@ -52,8 +54,8 @@
                     'verify_code' => 'required' ,
                 ] ,
                 'store'  => [
-                    'name' => 'required|max:255' ,
-                    'type' => 'required' ,
+                    'name'        => 'required|max:255' ,
+                    'type'        => 'required' ,
                     'verify_code' => 'required' ,
                 ] ,
             ] ,

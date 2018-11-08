@@ -17,6 +17,7 @@
                             <th style="text-align: center">{{ trans('view.admin.shop.manager') }}</th>
                             <th style="text-align: center">{{ trans('view.admin.shop.area') }}</th>
                             <th style="text-align: center">{{ trans('view.admin.shop.address') }}</th>
+                            <th style="text-align: center">{{ trans('view.admin.shop.city') }}</th>
                             <th style="text-align: center">{{ trans('view.admin.shop.discount') }}</th>
                             <th style="text-align: center">{{ trans('view.admin.public.created_at') }}</th>
                             <th style="text-align: center">{{ trans('view.admin.public.action') }}</th>
@@ -29,6 +30,7 @@
                                 <td>{{ $shop->hasOneManager ? $shop->hasOnemanager->display_name :'-'}}</td>
                                 <td>{{ $shop->belongsToArea ? $shop->belongsToArea->name : '-' }}</td>
                                 <td>{{ $shop->address }}</td>
+                                <td>{{ $shop->hasOneCity->city }}</td>
                                 <td>{{ $shop->discount? ($shop->discount/100).'元' :'-' }}</td>
                                 <td>{{ $shop->created_at }}</td>
                                 <td>

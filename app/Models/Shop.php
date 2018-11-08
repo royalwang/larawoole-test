@@ -12,7 +12,7 @@ class Shop extends Model
 
     public $incrementing=false;
 
-    protected $fillable = ['name','address','establish_time','manager_id','area_id','teacher_id','discount'];
+    protected $fillable = ['name','address','establish_time','manager_id','area_id','teacher_id','discount','city_code'];
 
     public function hasOneManager()
     {
@@ -67,6 +67,11 @@ class Shop extends Model
     public function belongsToArea()
     {
         return $this->belongsTo('App\Models\area','area_id','id');
+    }
+
+    public function hasOneCity()
+    {
+        return $this->hasOne('App\Models\CityCode','id','city_code');
     }
 
     public static function boot()

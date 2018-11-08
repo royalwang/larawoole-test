@@ -27,6 +27,7 @@
                 'machine_login_logout_record' => 'MachineLoginLogoutRecord' ,
                 'terminal_info'               => 'TerminalInfo' ,
                 'teacher'                     => 'teacher' ,
+                'city_code'                 =>  'CityCode',
             ] ,
         ] ,
 

@@ -148,6 +148,7 @@
             'discount'              => '门店价格' ,
             'area_manager'          => '门店经理' ,
             'verify_code'           => '识别码' ,
+            'city_code'     =>  '所在城市',
         ] ,
 
     ];
