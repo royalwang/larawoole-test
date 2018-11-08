@@ -634,21 +634,17 @@
                 //小票打印成功返回命令
                 case ( '54' ):
                     $str       = explode( ',' , $data );
+                    $equip_id  = substr( $str[0] , 7 );
                     $order_num = substr( explode( '\\' , $str[1] )[0] , 0 );
-                    $order     = Orders::where( 'order_num' , $order_num )->update(
+                    Orders::where( 'order_num' , $order_num )->update(
                         [
                             'if_get'   => '1' ,
                             'get_time' => Carbon::now()->toDateTimeString() ,
                         ]
                     );
-                    if ( $order )
-                    {
-                        return '540';
-                    }
-                    else
-                    {
-                        return '541';
-                    }
+                    $light = $this->getShopLight( $equip_id );
+
+                    return '54' . $light;
                     break;
 
                 //请求重新打印上一条订单信息
