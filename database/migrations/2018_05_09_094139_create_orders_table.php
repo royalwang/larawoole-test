@@ -23,7 +23,7 @@
                 $table->string( 'name' )->nullable();
                 $table->string( 'pic' )->nullable();
                 $table->string( 'get_type' , 1 );//0:现场取票 1:网上预定
-                $table->string( 'if_get' , 1 );//0:未取到票 1:已取到票
+                $table->string( 'if_get' , 1 )->nullable();//0:未取到票 1:已取到票
                 $table->string( 'user_id' )->nullable();//处理人员id
                 $table->string( 'shops_id' )->nullable();//出票店铺
                 $table->string( 'valid' , 1 )->default( '1' );

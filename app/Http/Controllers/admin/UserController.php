@@ -2,9 +2,7 @@
 
     namespace App\Http\Controllers\admin;
 
-    use App\Models\CityCode;
     use App\Models\Shop;
-    use App\Models\Sp;
     use App\Models\Teacher;
     use Speedy;
     use Illuminate\Http\Request;
@@ -692,7 +690,7 @@
          *
          * 例如：张XX，广东省广州市（店铺所属省份和市代码），入职时间是2018年10月。员工号码就是440118100001（后4位数按顺序累加）
          *
-         * @param string $identity 身份证号码
+         * @param string $city_code 城市代码
          * @param string $hire_date 入职时间
          *
          * @since 1.0
